@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import { User, Upload } from 'react-feather'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,12 +17,14 @@ export default function Home() {
               Joko Security
             </a>
           </li>
-          <li className="hover:cursor-pointer py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50">
-           <a className="px-4 text-lg" href="#">
+          <li className="hover:cursor-pointer px-2 py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50 flex items-center">
+            <User className="inline-block" />
+            <a className="px-4 text-lg" href="#">
               Item 1
             </a>
           </li>
-          <li className="hover:cursor-pointer py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-100">
+          <li className="hover:cursor-pointer px-2 py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50 flex items-center">
+            <Upload className="inline-block" />
             <a className="px-4 text-lg" href="#">
               Item 2
             </a>
@@ -36,9 +39,6 @@ export default function Home() {
           <p className="text-3xl font-bold">Bienvenido a Joko Security.</p>
           <h1 className="text-3xl">TODO:</h1>
           <ul>
-            <li>
-              Iconos para los items en el navbar.
-            </li>
             <li>
               Boton en la cabecera para esconder y hacer aparecer el navbar.
             </li>
