@@ -1,6 +1,6 @@
 import Link from "next/link"
 //Pagina de login para los usuarios.
-export default function Login() {
+export default function Login() { //bg-[#FF6969] es como tailwind dice background-color: #FF6969
     return ( 
         <> {/* TODO: Usar variables de css (no hay comentarios semanticos, bajon)*/}
             <div className="min-h-screen min-w-full mx-auto my-auto flex flex-col justify-center items-center bg-slate-900 text-white gap-4 font-serif">
@@ -17,11 +17,12 @@ export default function Login() {
                     <button type="submit" className="bg-gray-400 rounded-2xl p-2 min-w-full">Iniciar</button>
                     <div className="flex gap-5">
                         <p className="hover:underline cursor-pointer" >Olvido su contraseña?</p> {/* TODO: preguntar si me tengo que preocupar por esto. */}
-                        <p className="hover:underline"><Link href="/">Registrarse</Link></p> {/* TODO: crear pagina para registrarse. */}
+                        <p className="hover:underline"><Link href="/signup">Registrarse</Link></p> 
                     </div>
                 </form>
                     <p>
-                        <Link href="/" className="hover:font-extrabold">Click aqui</Link> para ir a la pagina principal {/* TODO: lo mas probable es que esto tenga que chutar */}
+                        <Link href="/" className="hover:font-extrabold">Click aqui</Link> para ir a la pagina principal 
+                        {/* TODO: lo mas probable es que esto tenga que chutar */}
                     </p>
             </div>
         </>
