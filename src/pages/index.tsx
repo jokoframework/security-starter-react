@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import { User, Upload } from 'react-feather'
+import { User, Upload, AlignJustify } from 'react-feather'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,8 +31,8 @@ export default function Home() {
           </li>
         </ul>
       </div>
-      <div className="max-sm:col-span-12 col-span-10 px-3 py-4">
-        <div>Cabecera</div>
+      <div className="max-sm:col-span-12 col-span-10 px-4 py-4">
+        <AlignJustify className="inline-block" />
       </div>
       <div className="row-span-3 max-sm:col-span-12 col-span-10 bg-neutral-100">
         <div className="m-4 p-4  h-screen bg-white">
