@@ -1,10 +1,38 @@
 import Link from "next/link"
+import React, { useState } from "react"
 //Pagina de registro para los usuarios.
 export default function Signup() {
+    const minimun = 12 //Longitud minima de contrasenha
+    const [pass1, setPass1] = useState('') //contra 1, seteador
+    const [pass2, setPass2] = useState('') //contra 2, seteador
+
+    /*  Maneja el evento de que cuando el input de contrasenha1 se "desenfoque" setea el valor de la contrasenha1 */
+    function handlePassword1Blur(event: React.ChangeEvent<HTMLInputElement>){
+        setPass1(event.target.value)
+    }
+    /*  Maneja el evento de que cuando el input de contrasenha2 se "desenfoque" setea el valor de la contrasenha2 */
+    function handlePassword2Blur(event: React.ChangeEvent<HTMLInputElement>){
+        setPass2(event.target.value)
+    }
+
+    /*  Compara las contrasenhas:
+            si son iguales, entonces deja enviar el formulario.
+            si no son iguales, entonces muestra un mensaje de error.
+    */
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault() //evito que el formulario se envíe de una
+        if (pass1 != pass2) {
+            alert("Las contras no coinciden, intente de nuevo.")
+            return false
+        }
+        event.currentTarget.submit()
+        return true
+    }
+
     return ( 
         <>
             <div className="min-h-screen min-w-full mx-auto my-auto flex flex-col justify-center items-center bg-slate-900 text-white gap-4 font-serif">
-                <form onSubmit={validarContrasenas} className="border flex flex-col justify-center items-center bg-slate-700 p-6 gap-4 rounded-3xl"
+                <form onSubmit={handleSubmit} className="border flex flex-col justify-center items-center bg-slate-700 p-6 gap-4 rounded-3xl"
                 action="/" method="post"> {/* TODO: ver donde enviar esto */}
                     <h1 className="italic text-3xl">
                         Registrarse
@@ -13,12 +41,12 @@ export default function Signup() {
                         <input type="email" className="block text-black min-w-full h-8 p-2" required placeholder="ejemplo@ejemplo.com"></input>
                     </label>
                     <label className="min-w-full">Contraseña: 
-                        <input type="password" id="password1" className="block text-black min-w-full h-8 p-2" 
-                        required minLength={12} placeholder="**********"></input>
+                        <input onBlur={handlePassword1Blur} type="password" className="block text-black min-w-full h-8 p-2" 
+                        required minLength={minimun} placeholder="**********"></input>
                     </label>
                     <label className="min-w-full">Confirmar contraseña: 
-                        <input type="password" id="password2" className="block text-black min-w-full h-8 p-2" 
-                        required minLength={12} placeholder="**********"></input>
+                        <input onBlur={handlePassword2Blur} type="password" className="block text-black min-w-full h-8 p-2" 
+                        required minLength={minimun} placeholder="**********"></input>
                     </label>
                     <button type="submit" className="bg-gray-400 rounded-2xl p-2 min-w-full">Registrarme</button>
                 </form>
@@ -29,20 +57,4 @@ export default function Signup() {
             </div>
         </>
     )
-}
-
-function validarContrasenas(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault() //evito que el formulario se envíe de una
-    const password1Input = document.getElementById("password1") as HTMLInputElement
-    const password2Input = document.getElementById("password2") as HTMLInputElement
-    //TODO: cambiar la forma que obtengo las contras, hacer mas react-like (usar estados)
-    const password1 = password1Input.value
-    const password2 = password2Input.value
-  
-    if (password1 != password2) { 
-        alert("Las contraseñas no coinciden. Por favor, inténtelo de nuevo.")
-        return false
-    }
-    event.currentTarget.submit() 
-    return true
 }
