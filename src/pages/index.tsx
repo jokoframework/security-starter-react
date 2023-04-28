@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { User, Upload, AlignJustify } from 'react-feather'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,21 +14,21 @@ export default function Home() {
       <div className="max-sm:hidden row-span-4 row-start-1 bg-blue-900 overflow-y-auto col-span-2 py-3 text-slate-300">
         <ul className="w-full">
           <li className="py-2 mx-2 font-semibold text-center">
-            <a className="px-4 text-xl hover:text-slate-50" href="#">
+            <Link className="px-4 text-xl hover:text-slate-50" href="/">
               Joko Security
-            </a>
+            </Link>
           </li>
           <li className="hover:cursor-pointer px-2 py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50 flex items-center">
             <User className="inline-block" />
-            <a className="px-4 text-lg" href="#">
+            <Link className="px-4 text-lg" href="#">
               Item 1
-            </a>
+            </Link>
           </li>
           <li className="hover:cursor-pointer px-2 py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50 flex items-center">
             <Upload className="inline-block" />
-            <a className="px-4 text-lg" href="#">
+            <Link className="px-4 text-lg" href="#">
               Item 2
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
