@@ -1,7 +1,7 @@
 import { User, Upload, AlignJustify } from 'react-feather'
 import Link from 'next/link'
 
-export default function PageLayout({ children }) {
+export default function PageLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid grid-rows-12 grid-cols-12">
       <div className="max-sm:hidden row-span-4 row-start-1 bg-blue-900 overflow-y-auto col-span-2 py-3 text-slate-300">
