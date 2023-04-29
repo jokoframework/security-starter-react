@@ -13,8 +13,12 @@ type AppPropsWithLayout = AppProps & {
 }
 
 export default function App({ Component, pageProps, ...appProps }: AppProps) {
+  /**
+   * La siguiente funcion se encarga de renderizar el layout o no dependiendo
+   * de la ruta. Actualmente solo ignora /login y /signup.
+   */
   const getContent = () => {
-    if (['/login'].includes(appProps.router.pathname))
+    if (['/login', '/signup'].includes(appProps.router.pathname))
       return <Component {...pageProps} />
     
     return (
