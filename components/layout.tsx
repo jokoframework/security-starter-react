@@ -11,18 +11,18 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
               Joko Security
             </Link>
           </li>
-          <li className="hover:cursor-pointer px-2 py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50 flex items-center">
-            <User className="inline-block" />
-            <Link className="px-4 text-lg" href="#">
-              Item 1
-            </Link>
-          </li>
-          <li className="hover:cursor-pointer px-2 py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50 flex items-center">
-            <Upload className="inline-block" />
-            <Link className="px-4 text-lg" href="#">
-              Item 2
-            </Link>
-          </li>
+          <Link href="#" passHref>
+            <li className="hover:cursor-pointer px-2 py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50 flex items-center">
+              <User className="inline-block" />
+              <div className="px-4 text-lg">Item 1</div>
+            </li>
+          </Link>
+          <Link href="#" passHref>
+            <li className="hover:cursor-pointer px-2 py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50 flex items-center">
+              <Upload className="inline-block" />
+              <div className="px-4 text-lg">Item 2</div>
+            </li>
+          </Link>
         </ul>
       </div>
       <div className="max-sm:col-span-12 col-span-10 px-4 py-4">
