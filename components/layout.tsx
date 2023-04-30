@@ -1,4 +1,4 @@
-import { User, Upload, AlignJustify } from 'react-feather'
+import { User, Upload, AlignJustify, Target } from 'react-feather'
 import Link from 'next/link'
 
 export default function PageLayout({ children }: { children: React.ReactNode }) {
@@ -9,7 +9,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
    * de las paginas dentro del componente Content.
    */
   return (
-    <div className="grid grid-rows-12 grid-cols-12">
+    <div className="grid grid-rows-12 grid-cols-12 bg-neutral-150">
       <Sidebar />
       <Header />
       <Content>
@@ -30,25 +30,37 @@ function Sidebar() {
    */
   return (
     <>
-      <div className="max-md:hidden row-span-4 row-start-1 bg-blue-900 overflow-y-auto col-span-2 py-3 text-slate-300">
-        <ul className="w-full">
-          <li className="py-2 mx-2 font-semibold text-center">
-            <Link className="px-4 text-xl hover:text-slate-50" href="/">
-              Joko Security
-            </Link>
+      <div className="max-md:hidden row-span-4 row-start-1 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450">
+        <Link className="py-3 px-4 text-xl flex items-center" href="/">
+          <Target size={50} className="border p-1 rounded-xl inline-block" />
+          <p className="px-3 inline-block antialiased text-black font-semibold">Joko Security</p>
+        </Link>
+        <ul className="w-full px-4">
+          <li className="py-2 mx-2">
+            Menú principal
           </li>
           <Link href="/item1" passHref>
-            <li className="hover:cursor-pointer px-2 py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50 flex items-center">
+            <li className="hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center">
               <User className="inline-block" />
-              <div className="px-4 text-lg">Item 1</div>
+              <div className="px-4 text-lg">Dashboard</div>
             </li>
           </Link>
           <Link href="/item2" passHref>
-            <li className="hover:cursor-pointer px-2 py-2 mx-2 rounded-md hover:bg-blue-500 hover:text-slate-50 flex items-center">
+            <li className="hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center">
               <Upload className="inline-block" />
-              <div className="px-4 text-lg">Item 2</div>
+              <div className="px-4 text-lg">Apps</div>
             </li>
           </Link>
+        </ul>
+        <ul className="w-full px-4">
+          <li className="py-2 mx-2">
+            Workflows
+          </li>
+        </ul>
+        <ul className="w-full px-4">
+          <li className="py-2 mx-2">
+            General
+          </li>
         </ul>
       </div>
     </>
