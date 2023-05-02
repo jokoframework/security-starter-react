@@ -1,5 +1,6 @@
-import { User, Upload, AlignJustify, Target } from 'react-feather'
+import { User, Upload, AlignJustify, Target, Clipboard, Settings } from 'react-feather'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export default function PageLayout({ children }: { children: React.ReactNode }) {
   /**
@@ -8,6 +9,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
    * El layout es un grid de Tailwind CSS con 12 columnas y 12 filas y renderiza todo el contenido
    * de las paginas dentro del componente Content.
    */
+  const [selectedModule, setSelectedModule] = useState('dashboard')
   return (
     <div className="grid grid-rows-12 grid-cols-12 bg-neutral-150">
       <Sidebar />
@@ -56,11 +58,23 @@ function Sidebar() {
           <li className="py-2 mx-2">
             Workflows
           </li>
+          <Link href="/item2" passHref>
+            <li className="hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center">
+              <Clipboard className="inline-block" />
+              <div className="px-4 text-lg">To-Do</div>
+            </li>
+          </Link>
         </ul>
         <ul className="w-full px-4">
           <li className="py-2 mx-2">
             General
           </li>
+          <Link href="/item2" passHref>
+            <li className="hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center">
+              <Settings className="inline-block" />
+              <div className="px-4 text-lg">Settings</div>
+            </li>
+          </Link>
         </ul>
       </div>
     </>
@@ -74,7 +88,7 @@ function Header() {
    */
   return (
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
-      <AlignJustify className="inline-block" />
+      <Link href="/login" passHref><div className="text-right">Iniciar sesión</div></Link>
     </div>
   )
 }
@@ -85,7 +99,7 @@ function Content({ children }: { children: React.ReactNode }) {
    */
   return (
     <div className="row-span-3 col-span-12 md:col-span-10 bg-neutral-100">
-      <div className="m-4 p-4 h-screen bg-white">
+      <div className="m-4 p-4 h-screen bg-white rounded-s drop-shadow-md">
         { children }
       </div>
     </div>
