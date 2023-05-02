@@ -13,7 +13,7 @@ export default function Home() {
       <h1 className="text-3xl">TODO:</h1>
       <ul>
         <li>
-          Boton en la cabecera para esconder y hacer aparecer el navbar <Link href='/login' className='hover:font-bold'>Click para iniciar sesion</Link>.
+          Boton en la cabecera para esconder y hacer aparecer el navbar.
         </li>
       </ul>
     </>
