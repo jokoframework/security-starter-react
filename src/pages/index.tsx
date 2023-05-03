@@ -15,6 +15,12 @@ export default function Home() {
         <li>
           Boton en la cabecera para esconder y hacer aparecer el navbar.
         </li>
+        <li>
+          Poner titulo de la cabecera.
+        </li>
+        <li>
+          Agregar fondo a modulo seleccionado.
+        </li>
       </ul>
     </>
   )

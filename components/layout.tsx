@@ -9,10 +9,10 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
    * El layout es un grid de Tailwind CSS con 12 columnas y 12 filas y renderiza todo el contenido
    * de las paginas dentro del componente Content.
    */
-  const [selectedModule, setSelectedModule] = useState('dashboard')
+  const [selectedModule, setSelectedModule] = useState(0)
   return (
     <div className="grid grid-rows-12 grid-cols-12 bg-neutral-150">
-      <Sidebar />
+      <Sidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
       <Header />
       <Content>
         { children }
@@ -21,7 +21,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
   )
 }
 
-function Sidebar() {
+function Sidebar({ selectedModule, setSelectedModule }) {
   /**
    * Sidebar del layout. 
    * Funciona como una lista <ul></ul> con la clase overflow-y-auto donde cada elemento <li></li> representa un item dentro
@@ -42,7 +42,10 @@ function Sidebar() {
             Menú principal
           </li>
           <Link href="/item1" passHref>
-            <li className="hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center">
+            <li className={selectedModule === 0 ?
+               "bg-blue-800 " : "" +
+               "hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center"}
+               onClick={() => setSelectedModule(0)}>
               <User className="inline-block" />
               <div className="px-4 text-lg">Dashboard</div>
             </li>
