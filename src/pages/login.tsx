@@ -5,8 +5,8 @@ import { LogIn } from "react-feather"
 export default function Login() { //bg-[#FF6969] es como tailwind dice background-color: #FF6969
     return ( 
         <> {/* TODO: Usar variables de css */}
-            {/* falta el media query */}
-            <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 font-serif selection:bg-[#4f46e5] selection:text-white">
+            {/* falta el media query HECHO*/}
+            <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 font-serif selection:bg-[#4f46e5] selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
                     <form className=" min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl border-2"> {/* TODO: ver donde enviar esto */}
                         {/* <Image src={""} alt="Logo"></Image> preguntar que logo quiere que ponga, o uso un icono de react-feather */}
@@ -35,7 +35,7 @@ export default function Login() { //bg-[#FF6969] es como tailwind dice backgroun
                             {/* TODO: lo mas probable es que esto tenga que chutar */}
                         </p>
                 </div>
-                <div className="border-2 min-h-full min-w-full flex items-center justify-center">
+                <div className="border-2 min-h-full min-w-full flex items-center justify-center max-md:hidden">
                     {/* <Image src={""} alt="Imagen"></Image> investigar */}
                 </div>
             </div>
