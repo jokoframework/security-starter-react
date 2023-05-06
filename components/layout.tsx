@@ -157,7 +157,9 @@ function Header({ selectedModule }: { selectedModule: Module }) {
   return (
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
       <Link href="/login" passHref><div className="text-right">Iniciar sesión</div></Link>
-      { selectedModule.name }
+      <div className="mx-4 text-3xl font-semibold">
+        { selectedModule.name }
+      </div>
     </div>
   )
 }
@@ -168,7 +170,7 @@ function Content({ children }: { children: React.ReactNode }) {
    */
   return (
     <div className="row-span-3 col-span-12 md:col-span-10 bg-neutral-100">
-      <div className="m-4 p-4 h-screen bg-white rounded-s drop-shadow-md">
+      <div className="m-5 p-4 h-screen bg-white rounded-s drop-shadow-md">
         { children }
       </div>
     </div>
