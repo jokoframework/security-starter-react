@@ -2,6 +2,18 @@ import { User, Upload, AlignJustify, Target, Clipboard, Settings } from 'react-f
 import Link from 'next/link'
 import { useState } from 'react'
 
+/**
+ * Representa informacion de un modulo.
+ * Esta informacion es utilizada por la cabecera y el sidebar para
+ * mostrar informacion al respecto.  
+ * id: Id designado al modulo.  
+ * name: Nombre asignado al modulo.
+ */
+type Module = {
+  id: number
+  name: string
+}
+
 export default function PageLayout({ children }: { children: React.ReactNode }) {
   /**
    * Layout principal del proyecto.
@@ -9,11 +21,15 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
    * El layout es un grid de Tailwind CSS con 12 columnas y 12 filas y renderiza todo el contenido
    * de las paginas dentro del componente Content.
    */
-  const [selectedModule, setSelectedModule] = useState(0)
+  const [selectedModule, setSelectedModule] = useState<Module>({
+      id: 0,
+      name: 'Dashboard',
+    }
+  )
   return (
     <div className="grid grid-rows-12 grid-cols-12 bg-neutral-150">
       <Sidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
-      <Header />
+      <Header selectedModule={selectedModule} />
       <Content>
         { children }
       </Content>
@@ -22,7 +38,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
 }
 
 function Sidebar({ selectedModule, setSelectedModule }: {
-  selectedModule: number,
+  selectedModule: Module,
   setSelectedModule: Function,
 }) {
   /**
@@ -44,24 +60,28 @@ function Sidebar({ selectedModule, setSelectedModule }: {
           <li className="py-2 mx-2">
             Menú principal
           </li>
-          <Link href="/item1" passHref>
+          <Link href="/" passHref>
             <SidebarItem 
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
-              moduleId={0}
+              moduleData={{
+                id: 0,
+                name: 'Dashboard',
+              }}
             >
               <User className="inline-block" />
-              <div className="px-4 text-lg">Dashboard</div>
             </SidebarItem>
           </Link>
-          <Link href="/item2" passHref>
+          <Link href="/item1" passHref>
             <SidebarItem
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
-              moduleId={1}
+              moduleData={{
+                id: 1,
+                name: 'Apps',
+              }}
             >
               <Upload className="inline-block" />
-              <div className="px-4 text-lg">Apps</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -73,10 +93,12 @@ function Sidebar({ selectedModule, setSelectedModule }: {
             <SidebarItem
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
-              moduleId={2}
+              moduleData={{
+                id: 2,
+                name: 'To-Do',
+              }}
             >
               <Clipboard className="inline-block" />
-              <div className="px-4 text-lg">To-Do</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -88,10 +110,12 @@ function Sidebar({ selectedModule, setSelectedModule }: {
           <SidebarItem
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
-              moduleId={3}
+              moduleData={{
+                id: 3,
+                name: 'Settings',
+              }}
             >              
               <Settings className="inline-block" />
-              <div className="px-4 text-lg">Settings</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -100,10 +124,10 @@ function Sidebar({ selectedModule, setSelectedModule }: {
   )
 }
 
-function SidebarItem({ selectedModule, setSelectedModule, moduleId, children }: {
-  selectedModule: number,
+function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }: {
+  selectedModule: Module,
   setSelectedModule: Function,
-  moduleId: number,
+  moduleData: Module,
   children: React.ReactNode,
 }) {
   /**
@@ -115,16 +139,17 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleId, children }: 
    * children: Contenido del item.
    */
   return (
-    <li className={(selectedModule === moduleId ?
-      "bg-blue-800 " : "") +
-      "hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center"}
-      onClick={() => setSelectedModule(moduleId)}>
+    <li className={(selectedModule.id === moduleData.id ?
+      "bg-blue-450 text-black font-bold" : "hover:bg-blue-450 hover:text-black ") +
+      "hover:cursor-pointer px-2 py-2 rounded-md flex items-center"}
+      onClick={() => setSelectedModule(moduleData)}>
      { children }
+     <div className="px-4 text-lg">{moduleData.name}</div>
    </li>
   )
 }
 
-function Header() {
+function Header({ selectedModule }: { selectedModule: Module }) {
   /**
    * Cabecera de la pagina, actualmente solo contiene un icono que es clickeable para poder colapsar el sidebar.
    * TODO: Hacer que el icono sea clickeable para colapsar el sidebar.
@@ -132,6 +157,7 @@ function Header() {
   return (
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
       <Link href="/login" passHref><div className="text-right">Iniciar sesión</div></Link>
+      { selectedModule.name }
     </div>
   )
 }
