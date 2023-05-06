@@ -21,7 +21,10 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
   )
 }
 
-function Sidebar({ selectedModule, setSelectedModule }) {
+function Sidebar({ selectedModule, setSelectedModule }: {
+  selectedModule: number,
+  setSelectedModule: Function,
+}) {
   /**
    * Sidebar del layout. 
    * Funciona como una lista <ul></ul> con la clase overflow-y-auto donde cada elemento <li></li> representa un item dentro
@@ -42,19 +45,24 @@ function Sidebar({ selectedModule, setSelectedModule }) {
             Menú principal
           </li>
           <Link href="/item1" passHref>
-            <li className={selectedModule === 0 ?
-               "bg-blue-800 " : "" +
-               "hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center"}
-               onClick={() => setSelectedModule(0)}>
+            <SidebarItem 
+              selectedModule={selectedModule}
+              setSelectedModule={setSelectedModule}
+              moduleId={0}
+            >
               <User className="inline-block" />
               <div className="px-4 text-lg">Dashboard</div>
-            </li>
+            </SidebarItem>
           </Link>
           <Link href="/item2" passHref>
-            <li className="hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center">
+            <SidebarItem
+              selectedModule={selectedModule}
+              setSelectedModule={setSelectedModule}
+              moduleId={1}
+            >
               <Upload className="inline-block" />
               <div className="px-4 text-lg">Apps</div>
-            </li>
+            </SidebarItem>
           </Link>
         </ul>
         <ul className="w-full px-4">
@@ -62,10 +70,14 @@ function Sidebar({ selectedModule, setSelectedModule }) {
             Workflows
           </li>
           <Link href="/item2" passHref>
-            <li className="hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center">
+            <SidebarItem
+              selectedModule={selectedModule}
+              setSelectedModule={setSelectedModule}
+              moduleId={2}
+            >
               <Clipboard className="inline-block" />
               <div className="px-4 text-lg">To-Do</div>
-            </li>
+            </SidebarItem>
           </Link>
         </ul>
         <ul className="w-full px-4">
@@ -73,14 +85,42 @@ function Sidebar({ selectedModule, setSelectedModule }) {
             General
           </li>
           <Link href="/item2" passHref>
-            <li className="hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center">
+          <SidebarItem
+              selectedModule={selectedModule}
+              setSelectedModule={setSelectedModule}
+              moduleId={3}
+            >              
               <Settings className="inline-block" />
               <div className="px-4 text-lg">Settings</div>
-            </li>
+            </SidebarItem>
           </Link>
         </ul>
       </div>
     </>
+  )
+}
+
+function SidebarItem({ selectedModule, setSelectedModule, moduleId, children }: {
+  selectedModule: number,
+  setSelectedModule: Function,
+  moduleId: number,
+  children: React.ReactNode,
+}) {
+  /**
+   * Representa un item dentro del Sidebar (diferente de un titulo).
+   * Recibe:
+   * selectedModule: El id del modulo seleccionado.
+   * setSelectedModule: Funcion para cambiar el modulo seleccionado por moduleId.
+   * moduleId: Id del modulo al que hace referencia este item.
+   * children: Contenido del item.
+   */
+  return (
+    <li className={(selectedModule === moduleId ?
+      "bg-blue-800 " : "") +
+      "hover:cursor-pointer px-2 py-2 rounded-md hover:bg-blue-450 hover:text-black flex items-center"}
+      onClick={() => setSelectedModule(moduleId)}>
+     { children }
+   </li>
   )
 }
 
