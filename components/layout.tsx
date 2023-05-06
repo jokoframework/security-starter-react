@@ -156,7 +156,12 @@ function Header({ selectedModule }: { selectedModule: Module }) {
    */
   return (
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
-      <Link href="/login" passHref><div className="text-right">Iniciar sesión</div></Link>
+      <div className="md:hidden flex items-center justify-between">
+        <AlignJustify />
+        <Target size={50} className="border p-1 rounded-xl" />
+        <Link href="/login" passHref><div className="text-right">Login</div></Link>
+      </div>
+      <Link href="/login" passHref><div className="text-right">Login</div></Link>
       <div className="mx-4 text-3xl font-semibold">
         { selectedModule.name }
       </div>
