@@ -1,14 +1,14 @@
 import Link from "next/link"
 import Image from "next/image"
 import { LogIn } from "react-feather"
+import imagen from '../../images/image1.jpg'
 //Pagina de login para los usuarios.
 export default function Login() { //bg-[#FF6969] es como tailwind dice background-color: #FF6969
-    return ( 
+    return (
         <> {/* TODO: Usar variables de css */}
-            {/* falta el media query HECHO*/}
             <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 font-serif selection:bg-[#4f46e5] selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
-                    <form className=" min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl border-2"> {/* TODO: ver donde enviar esto */}
+                    <form className=" min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl"> {/* TODO: ver donde enviar esto */}
                         {/* <Image src={""} alt="Logo"></Image> preguntar que logo quiere que ponga, o uso un icono de react-feather */}
                         <LogIn size={150} color="#4f46e5"></LogIn>
                         <h1 className="italic text-3xl font-black">
@@ -19,7 +19,7 @@ export default function Login() { //bg-[#FF6969] es como tailwind dice backgroun
                             border-2 invalid:text-red-500 invalid:border-red-500" 
                             required placeholder="ejemplo@ejemplo.com"></input>
                         </label>
-                        <label className="min-w-full pt-2 pb-2">Contraseña: 
+                        <label className="min-w-full pt-2 pb-2">Introduzca su contraseña: 
                             <input type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" required placeholder="**********"></input>
                         </label>
                         <div className="min-w-full flex justify-around"> 
@@ -35,8 +35,8 @@ export default function Login() { //bg-[#FF6969] es como tailwind dice backgroun
                             {/* TODO: lo mas probable es que esto tenga que chutar */}
                         </p>
                 </div>
-                <div className="border-2 min-h-full min-w-full flex items-center justify-center max-md:hidden">
-                    {/* <Image src={""} alt="Imagen"></Image> investigar */}
+                <div className="min-h-full min-w-full flex items-center justify-center max-md:hidden">
+                    <Image src={imagen} className='max-h-screen h-fit max-w-screen w-fit' alt="Imagen"></Image>
                 </div>
             </div>
         </>
