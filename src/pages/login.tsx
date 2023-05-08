@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { LogIn } from "react-feather"
-import imagen from '../../images/image1.jpg'
+import imagen from '../../images/modelo.jpg'
 //Pagina de login para los usuarios.
 export default function Login() { //bg-[#FF6969] es como tailwind dice background-color: #FF6969
     return (
@@ -36,7 +36,7 @@ export default function Login() { //bg-[#FF6969] es como tailwind dice backgroun
                         </p>
                 </div>
                 <div className="min-h-full min-w-full flex items-center justify-center max-md:hidden">
-                    <Image src={imagen} className='max-h-screen h-fit max-w-screen w-fit' alt="Imagen"></Image>
+                    <Image src={imagen} className='max-h-screen min-h-full object-cover' alt="Imagen"></Image>
                 </div>
             </div>
         </>
