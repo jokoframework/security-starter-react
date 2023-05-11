@@ -1,4 +1,4 @@
-import { User, Upload, AlignJustify, Target, Clipboard, Settings } from 'react-feather'
+import { User, Upload, AlignJustify, Target, Clipboard, Settings, X } from 'react-feather'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -26,20 +26,44 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
       name: 'Dashboard',
     }
   )
+  const [isSidebarCollapsed, setSidebarCollapsed] = useState(false)
   return (
     <>
       <div className="static grid grid-rows-12 grid-cols-12 bg-neutral-150">
-        <div className="absolute h-screen z-10 bg-black">
-          
-        </div>
+        <CollapsedSidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}
+          isSidebarCollapsed={isSidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed} />
         <Sidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
-        <Header selectedModule={selectedModule} />
+        <Header selectedModule={selectedModule} setSidebarCollapsed={setSidebarCollapsed} />
         <Content>
           { children }
         </Content>
       </div>
     </>
   )
+}
+
+function CollapsedSidebar({ selectedModule, setSelectedModule, isSidebarCollapsed, setSidebarCollapsed }: {
+  selectedModule: Module,
+  setSelectedModule: Function,
+  isSidebarCollapsed: boolean,
+  setSidebarCollapsed: Function,
+}) {
+  if (isSidebarCollapsed == false) {
+    return(
+      <></>
+    )
+  }
+  else {
+    return(
+      <div className="absolute h-screen z-10 bg-white text-neutral-450 w-5/6">
+          {
+            // ! Hay que sacar max-md:hidden para que funcione, ver como hacer que funcione.
+          }
+        <X className="m-3 hover:cursor-pointer" onClick={() => setSidebarCollapsed(false)} />
+        <Sidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>    
+      </div>
+    )
+  }
 }
 
 function Sidebar({ selectedModule, setSelectedModule }: {
@@ -56,7 +80,7 @@ function Sidebar({ selectedModule, setSelectedModule }: {
    */
   return (
     <>
-      <div className="max-md:hidden row-span-4 row-start-1 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450">
+      <div className=" row-span-4 row-start-1 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450">
         <Link className="py-3 px-4 text-xl flex items-center" href="/">
           <Target size={50} className="border p-1 rounded-xl inline-block" />
           <p className="px-3 inline-block antialiased text-black font-semibold">Joko Security</p>
@@ -150,11 +174,14 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
       onClick={() => setSelectedModule(moduleData)}>
      { children }
      <div className="px-4 text-lg">{moduleData.name}</div>
-   </li>
+    </li>
   )
 }
 
-function Header({ selectedModule }: { selectedModule: Module }) {
+function Header({ selectedModule, setSidebarCollapsed }: { 
+  selectedModule: Module,
+  setSidebarCollapsed: Function,
+}) {
   /**
    * Cabecera de la pagina, actualmente solo contiene un icono que es clickeable para poder colapsar el sidebar.
    * TODO: Hacer que el icono sea clickeable para colapsar el sidebar.
@@ -163,7 +190,7 @@ function Header({ selectedModule }: { selectedModule: Module }) {
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
       <div className="md:hidden flex items-center justify-between">
         <AlignJustify />
-        <Target size={50} className="border p-1 rounded-xl" />
+        <Target size={50} className="border p-1 rounded-xl" onClick={() => setSidebarCollapsed(false)} />
         <Link href="/login" passHref><div className="text-right">Login</div></Link>
       </div>
       <Link href="/login" className="max-md:hidden" passHref><div className="text-right">Login</div></Link>
