@@ -27,13 +27,18 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
     }
   )
   return (
-    <div className="grid grid-rows-12 grid-cols-12 bg-neutral-150">
-      <Sidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
-      <Header selectedModule={selectedModule} />
-      <Content>
-        { children }
-      </Content>
-    </div>
+    <>
+      <div className="static grid grid-rows-12 grid-cols-12 bg-neutral-150">
+        <div className="absolute h-screen z-10 bg-black">
+          
+        </div>
+        <Sidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
+        <Header selectedModule={selectedModule} />
+        <Content>
+          { children }
+        </Content>
+      </div>
+    </>
   )
 }
 
