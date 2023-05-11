@@ -161,7 +161,7 @@ function Header({ selectedModule }: { selectedModule: Module }) {
         <Target size={50} className="border p-1 rounded-xl" />
         <Link href="/login" passHref><div className="text-right">Login</div></Link>
       </div>
-      <Link href="/login" passHref><div className="text-right">Login</div></Link>
+      <Link href="/login" className="max-md:hidden" passHref><div className="text-right">Login</div></Link>
       <div className="mx-4 text-3xl font-semibold">
         { selectedModule.name }
       </div>
