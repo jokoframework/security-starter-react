@@ -189,8 +189,8 @@ function Header({ selectedModule, setSidebarCollapsed }: {
   return (
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
       <div className="md:hidden flex items-center justify-between">
-        <AlignJustify />
-        <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" onClick={() => setSidebarCollapsed(false)} />
+        <AlignJustify onClick={() => setSidebarCollapsed(false)} />
+        <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" />
         <Link href="/login" passHref><div className="text-right">Login</div></Link>
       </div>
       <Link href="/login" className="max-md:hidden" passHref><div className="text-right">Login</div></Link>
