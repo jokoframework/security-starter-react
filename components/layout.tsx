@@ -48,7 +48,7 @@ function CollapsedSidebar({ selectedModule, setSelectedModule, isSidebarCollapse
   isSidebarCollapsed: boolean,
   setSidebarCollapsed: Function,
 }) {
-  if (isSidebarCollapsed == false) {
+  if (isSidebarCollapsed == true) {
     return(
       <></>
     )
@@ -59,7 +59,7 @@ function CollapsedSidebar({ selectedModule, setSelectedModule, isSidebarCollapse
           {
             // ! Hay que sacar max-md:hidden para que funcione, ver como hacer que funcione.
           }
-        <X className="m-3 hover:cursor-pointer" onClick={() => setSidebarCollapsed(false)} />
+        <X className="m-3 hover:cursor-pointer" onClick={() => setSidebarCollapsed(true)} />
         <Sidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>    
       </div>
     )
@@ -190,7 +190,7 @@ function Header({ selectedModule, setSidebarCollapsed }: {
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
       <div className="md:hidden flex items-center justify-between">
         <AlignJustify />
-        <Target size={50} className="border p-1 rounded-xl" onClick={() => setSidebarCollapsed(false)} />
+        <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" onClick={() => setSidebarCollapsed(false)} />
         <Link href="/login" passHref><div className="text-right">Login</div></Link>
       </div>
       <Link href="/login" className="max-md:hidden" passHref><div className="text-right">Login</div></Link>
