@@ -26,7 +26,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
       name: 'Dashboard',
     }
   )
-  const [isSidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [isSidebarCollapsed, setSidebarCollapsed] = useState(true)
   return (
     <>
       <div className="static grid grid-rows-12 grid-cols-12 bg-neutral-150">
