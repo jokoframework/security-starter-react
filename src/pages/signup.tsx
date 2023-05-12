@@ -34,7 +34,7 @@ export default function Signup() {
 
     return ( 
         <>
-            <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 bg-neutral-150 selection:bg-[#4f46e5] selection:text-white max-md:grid-cols-1">
+            <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 bg-neutral-150 selection:bg-lila selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
                     <form onSubmit={handleSubmit} className="min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl"
                     action="/" method="post"> {/* TODO: ver donde enviar esto */}
@@ -42,7 +42,7 @@ export default function Signup() {
                         <h1 className="text-3xl font-black">
                             Registrarse
                         </h1>
-                        <label className="min-w-full pt-1 pb-2">Introduzca su email: {/* si esta vacio entonces que no aplique los colores */}
+                        <label className="min-w-full pt-1 pb-2">Introduzca su email:
                             <input type="email" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" required placeholder="ejemplo@ejemplo.com"></input>
                         </label>
                         <label className="min-w-full pt-1 pb-2">Introduzca su contraseña: 
@@ -53,7 +53,7 @@ export default function Signup() {
                             <input onBlur={handlePassword2Blur} type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" 
                             required minLength={minimun} placeholder="**********"></input>
                         </label>
-                        <button type="submit" className="bg-[#4f46e5] text-white rounded-2xl p-2 min-w-full">Registrarme</button>
+                        <button type="submit" className="bg-lila text-white rounded-2xl p-2 min-w-full">Registrarme</button>
                     </form>
                     <p>
                         <Link href="/" className="hover:font-extrabold">Click aqui</Link> para ir a la pagina principal 
