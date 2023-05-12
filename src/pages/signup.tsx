@@ -34,7 +34,7 @@ export default function Signup() {
 
     return ( 
         <>
-            <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 selection:bg-[#4f46e5] selection:text-white max-md:grid-cols-1">
+            <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 bg-neutral-150 selection:bg-[#4f46e5] selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
                     <form onSubmit={handleSubmit} className="min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl"
                     action="/" method="post"> {/* TODO: ver donde enviar esto */}
