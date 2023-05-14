@@ -32,7 +32,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
       <div className="static grid grid-rows-12 grid-cols-12 bg-neutral-150">
         <CollapsedSidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}
           isSidebarCollapsed={isSidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed} />
-        <Sidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
+        <Sidebar classes={"max-md:hidden"} selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
         <Header selectedModule={selectedModule} setSidebarCollapsed={setSidebarCollapsed} />
         <Content>
           { children }
@@ -48,6 +48,12 @@ function CollapsedSidebar({ selectedModule, setSelectedModule, isSidebarCollapse
   isSidebarCollapsed: boolean,
   setSidebarCollapsed: Function,
 }) {
+  /**
+   * Sidebar colapsado, solo es visible para breakpoins inferiores a md.
+   * Recibe la informacion del modulo seleccionado actualmente y un estado
+   * que representa si el sidebar tiene que estar colapsado (o sea, visible) o
+   * no actualmente.
+   */
   if (isSidebarCollapsed == true) {
     return(
       <></>
@@ -55,20 +61,18 @@ function CollapsedSidebar({ selectedModule, setSelectedModule, isSidebarCollapse
   }
   else {
     return(
-      <div className="absolute h-screen z-10 bg-white text-neutral-450 w-5/6">
-          {
-            // ! Hay que sacar max-md:hidden para que funcione, ver como hacer que funcione.
-          }
+      <div className="md:hidden absolute border-r-2 h-screen z-10 bg-white text-neutral-450 w-5/6">
         <X className="m-3 hover:cursor-pointer" onClick={() => setSidebarCollapsed(true)} />
-        <Sidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>    
+        <Sidebar classes={""} selectedModule={selectedModule} setSelectedModule={setSelectedModule}/> 
       </div>
     )
   }
 }
 
-function Sidebar({ selectedModule, setSelectedModule }: {
+function Sidebar({ selectedModule, setSelectedModule, classes }: {
   selectedModule: Module,
   setSelectedModule: Function,
+  classes: String,
 }) {
   /**
    * Sidebar del layout. 
@@ -76,11 +80,10 @@ function Sidebar({ selectedModule, setSelectedModule }: {
    * del sidebar. 
    * Ademas, cada elemento que no sea el titulo del sidebar tiene un next/link alrededor del <li></li> para
    * poder redireccionar a esa pagina.
-   * TODO: Hacer que sea colapsable.
    */
   return (
     <>
-      <div className=" row-span-4 row-start-1 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450">
+      <div className={classes + " row-span-4 row-start-1 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450"}>
         <Link className="py-3 px-4 text-xl flex items-center" href="/">
           <Target size={50} className="border p-1 rounded-xl inline-block" />
           <p className="px-3 inline-block antialiased text-black font-semibold">Joko Security</p>
