@@ -14,13 +14,15 @@ type Module = {
   name: string
 }
 
+
+/**
+ * Layout principal del proyecto.  
+ * Actualmente esta divido en 4 partes: CollapsedSidebar, Sidebar, Header y Content.  
+ * El layout es un grid de Tailwind con 12 columnas y 12 filas y renderiza todo el contenido
+ * de las paginas dentro del componente Content.
+ * El sidebar colapsado solo puede ser visto para breakpoints inferiores a md.  
+ */
 export default function PageLayout({ children }: { children: React.ReactNode }) {
-  /**
-   * Layout principal del proyecto.
-   * Actualmente esta divido en 3 partes: Sidebar, Header y Content.
-   * El layout es un grid de Tailwind CSS con 12 columnas y 12 filas y renderiza todo el contenido
-   * de las paginas dentro del componente Content.
-   */
   const [selectedModule, setSelectedModule] = useState<Module>({
       id: 0,
       name: 'Dashboard',
@@ -42,18 +44,24 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
   )
 }
 
+/**
+ * Sidebar colapsado, solo es visible para breakpoins inferiores a md.
+ * Recibe la informacion del modulo seleccionado actualmente y un estado
+ * que representa si el sidebar tiene que estar colapsado (o sea, visible) o
+ * no actualmente.  
+ * Si el icono X es seleccionado entonces se cambia el estado del sidebar a colapsado.    
+ * Recibe:  
+ * selectedModule: Objeto tipo Module con informacion del actualmente seleccionado.  
+ * setSelectedModule: Funcion para cambiar selectedModule.  
+ * isSidebarCollapsed: Booleano que representa si el sidebar esta colapsado o no.  
+ * setSidebarCollapsed: Funcion para cambiar el estado del sidebar a colapsado.
+ */
 function CollapsedSidebar({ selectedModule, setSelectedModule, isSidebarCollapsed, setSidebarCollapsed }: {
   selectedModule: Module,
   setSelectedModule: Function,
   isSidebarCollapsed: boolean,
   setSidebarCollapsed: Function,
 }) {
-  /**
-   * Sidebar colapsado, solo es visible para breakpoins inferiores a md.
-   * Recibe la informacion del modulo seleccionado actualmente y un estado
-   * que representa si el sidebar tiene que estar colapsado (o sea, visible) o
-   * no actualmente.
-   */
   if (isSidebarCollapsed == true) {
     return(
       <></>
@@ -69,18 +77,21 @@ function CollapsedSidebar({ selectedModule, setSelectedModule, isSidebarCollapse
   }
 }
 
+/**
+ * Sidebar del layout.  
+ * Funciona como una lista <ul></ul> con la clase overflow-y-auto donde cada elemento <li></li> representa un item dentro
+ * del sidebar.  
+ * Ademas, cada elemento que no sea el titulo del sidebar tiene un next/link alrededor del <li></li> para
+ * poder redireccionar a esa pagina.  
+ * Recibe:  
+ * selectedModule: Objeto tipo Module con informacion del actualmente seleccionado.  
+ * setSelectedModule: Funcion para cambiar selectedModule.  
+ */
 function Sidebar({ selectedModule, setSelectedModule, classes }: {
   selectedModule: Module,
   setSelectedModule: Function,
   classes: String,
 }) {
-  /**
-   * Sidebar del layout. 
-   * Funciona como una lista <ul></ul> con la clase overflow-y-auto donde cada elemento <li></li> representa un item dentro
-   * del sidebar. 
-   * Ademas, cada elemento que no sea el titulo del sidebar tiene un next/link alrededor del <li></li> para
-   * poder redireccionar a esa pagina.
-   */
   return (
     <>
       <div className={classes + " row-span-4 row-start-1 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450"}>
@@ -156,39 +167,46 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
   )
 }
 
+/**
+ * Representa un item dentro del Sidebar (diferente de un titulo).
+ * Cuando un item es seleccionado esto se ve reflejado en el sidebar cambiando el
+ * color de fondo.  
+ * Recibe:  
+ * selectedModule: Objeto tipo Module con informacion del modulo actualmente seleccionado.  
+ * setSelectedModule: Funcion para cambiar selectedModule si el item es clickeado.  
+ * moduleData: Objeto tipo Module con informacion sobre el modulo asociado a este item.  
+ * children: Contenido del item.  
+ */
 function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }: {
   selectedModule: Module,
   setSelectedModule: Function,
   moduleData: Module,
   children: React.ReactNode,
 }) {
-  /**
-   * Representa un item dentro del Sidebar (diferente de un titulo).
-   * Recibe:
-   * selectedModule: El id del modulo seleccionado.
-   * setSelectedModule: Funcion para cambiar el modulo seleccionado por moduleId.
-   * moduleId: Id del modulo al que hace referencia este item.
-   * children: Contenido del item.
-   */
   return (
     <li className={(selectedModule.id === moduleData.id ?
       "bg-blue-450 text-black font-bold" : "hover:bg-blue-450 hover:text-black ") +
       "hover:cursor-pointer px-2 py-2 rounded-md flex items-center"}
-      onClick={() => setSelectedModule(moduleData)}>
+      onClick={() => setSelectedModule(moduleData)}
+    >
      { children }
      <div className="px-4 text-lg">{moduleData.name}</div>
     </li>
   )
 }
 
+/**
+ * Cabecera de la pagina, contiene un icono que es clickeable para poder colapsar el sidebar
+ * y un boton para redirigir a la pagina de login.  
+ * Si el icono AlignJustify es clickeado se cambia el estado del sidebar a no colapsado.  
+ * Recibe:  
+ * selectedModule: Objeto tipo Module con informacion del modulo actualmente seleccionado.  
+ * setSidebarCollapsed: Funcion para cambiar el estado del sidebar a no colapsado.
+ */
 function Header({ selectedModule, setSidebarCollapsed }: { 
   selectedModule: Module,
   setSidebarCollapsed: Function,
 }) {
-  /**
-   * Cabecera de la pagina, actualmente solo contiene un icono que es clickeable para poder colapsar el sidebar.
-   * TODO: Hacer que el icono sea clickeable para colapsar el sidebar.
-   */
   return (
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
       <div className="md:hidden flex items-center justify-between">
@@ -204,10 +222,12 @@ function Header({ selectedModule, setSidebarCollapsed }: {
   )
 }
 
+/**
+ * Representa el contenido de la pagina que esta siendo visitada actualmente.  
+ * Recibe:  
+ * children: Contenido a mostrar definido en cada pagina dentro de pages/. 
+ */
 function Content({ children }: { children: React.ReactNode }) {
-  /**
-   * Representa el contenido de la pagina que esta siendo visitada actualmente.
-   */
   return (
     <div className="row-span-3 col-span-12 md:col-span-10 bg-neutral-100">
       <div className="m-5 p-4 h-screen bg-white rounded-s drop-shadow-md">
