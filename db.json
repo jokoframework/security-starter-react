@@ -1,0 +1,29 @@
+{
+    "tokens": [
+        {
+            "id": 1,
+            "infoUser": "Informacion de usuario: Alain Vega",
+            "token": "abc"
+        },
+        {   
+            "id": 2,
+            "infoUser": "Informacion de usuario: Mathias Martinez",
+            "token": "def"
+        },
+        {   
+            "id": 3,
+            "infoUser": "Informacion de usuario: Rodrigo Villalba",
+            "token": "ghi"
+        },
+        {   
+            "id": 4,
+            "infoUser": "Informacion de usuario: Nelson Canatta",
+            "token": "jkl"
+        },
+        {   
+            "id": 5,
+            "infoUser": "Informacion de usuario: Cesar Torras",
+            "token": "mno"
+        }
+    ]
+}
