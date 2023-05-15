@@ -27,10 +27,10 @@ Si el icono X es seleccionado entonces se cambia el estado del sidebar a colapsa
 #### Parámetros
 | Parámetro | Tipo | Requerido | Descripción |
 | --------- | ---- | --------- | ----------- |
-| selectedModule | Module | Requerido | Objeto tipo Module con informacion del actualmente seleccionado. |
-| setSelectedModule | Function | Requerido | Funcion para cambiar selectedModule. |
+| selectedModule | Module | Requerido | Objeto tipo Module con información del módulo actualmente seleccionado. |
+| setSelectedModule | Function | Requerido | Función para cambiar selectedModule. |
 | isSidebarCollapsed | Boolean | Requerido | Booleano que representa si el sidebar esta colapsado o no. |
-| setSidebarCollapsed | Function | Requerido | Funcion para cambiar el estado del sidebar a colapsado. |
+| setSidebarCollapsed | Function | Requerido | Función para cambiar el estado del sidebar a colapsado. |
 ### Sidebar
 Sidebar del layout.  
 Funciona como una lista ```<ul></ul>``` con la clase ```overflow-y-auto``` donde cada elemento ```<li></li>``` representa un item dentro del sidebar.  
@@ -46,8 +46,8 @@ Cuando un item es seleccionado esto se ve reflejado en el sidebar cambiando el c
 #### Parámetros
 | Parámetro | Tipo | Requerido | Descripción |
 | --------- | ---- | --------- | ----------- |
-| selectedModule | Module | Requerido | Objeto tipo Module con informacion del actualmente seleccionado. |
-| setSelectedModule | Function | Requerido | Funcion para cambiar selectedModule. |
+| selectedModule | Module | Requerido | Objeto tipo Module con información del módulo actualmente seleccionado. |
+| setSelectedModule | Function | Requerido | Función para cambiar selectedModule. |
 | moduleData | Module | Requerido | Información sobre el módulo. |
 ### Header
 Cabecera de la página, contiene un ícono clickeable para poder colapsar el sidebar y un botón para redirigir a la página de login.  
@@ -55,7 +55,7 @@ Si el ícono AlignJustify es clickeado se cambia el estado del sidebar a no cola
 #### Parámetros 
 | Parámetro | Tipo | Requerido | Descripción |
 | --------- | ---- | --------- | ----------- |
-| selectedModule | Module | Requerido | Objeto tipo Module con informacion del actualmente seleccionado. |
+| selectedModule | Module | Requerido | Objeto tipo Module con información del módulo actualmente seleccionado. |
 | setSidebarCollapsed | Function | Requerido | Función para cambiar el estado del sidebar a no colapsado. |
 ### Content
 Representa el contenido de la página que está siendo visitada.  
