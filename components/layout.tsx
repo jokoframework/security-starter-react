@@ -150,7 +150,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
             General
           </li>
           <Link href="/item2" passHref>
-          <SidebarItem
+            <SidebarItem
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
               moduleData={{
@@ -229,10 +229,8 @@ function Header({ selectedModule, setSidebarCollapsed }: {
  */
 function Content({ children }: { children: React.ReactNode }) {
   return (
-    <div className="row-span-3 col-span-12 md:col-span-10 bg-neutral-100">
-      <div className="m-5 p-4 h-screen bg-white rounded-s drop-shadow-md">
-        { children }
-      </div>
+    <div className="row-span-3 col-span-12 md:col-span-10 h-screen bg-neutral-100">
+      { children }
     </div>
   )
 }
