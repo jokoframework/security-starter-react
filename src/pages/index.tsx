@@ -63,21 +63,23 @@ const dataFormatter = (number: number) => {
 export default function Home() {
   return (
     <>
-      <Grid numCols={1} numColsSm={2} numColsLg={3} className="gap-8 m-5">
+      <Grid numCols={1} numColsMd={3} className="gap-8 m-5">
         {categories.map((item) => (
-          <Card key={item.title}>
-            <Flex alignItems="start">
-              <Text>{item.title}</Text>
-            </Flex>
-            <Flex
-              className="space-x-3 truncate"
-              justifyContent="start"
-              alignItems="baseline"
-            >
-              <Metric>{item.metric}</Metric>
-              <Text className="truncate">from {item.metricPrev}</Text>
-            </Flex>
-          </Card>
+          <Col numColSpan={3} numColSpanMd={1} key={item.title}>
+            <Card>
+              <Flex alignItems="start">
+                <Text>{item.title}</Text>
+              </Flex>
+              <Flex
+                className="space-x-3 truncate"
+                justifyContent="start"
+                alignItems="baseline"
+              >
+                <Metric>{item.metric}</Metric>
+                <Text className="truncate">from {item.metricPrev}</Text>
+              </Flex>
+            </Card>
+          </Col>
         ))}
         <Col numColSpan={3}>
           <Card>
