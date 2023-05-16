@@ -12,7 +12,7 @@ export default function Login( {id, userInfo, token, expires}: {id: number, user
         alert('id: '+id+'\nuserInfo: '+userInfo+'\ntoken: '+token+'\nexpires: '+expires);
     }
 
-    //Pagina de login para los usuarios.
+//Pagina de login para los usuarios.
     return (
         <>
             <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 bg-neutral-150 selection:bg-lila selection:text-white max-md:grid-cols-1">
@@ -47,12 +47,13 @@ export default function Login( {id, userInfo, token, expires}: {id: number, user
                 </div>
             </div>
         </>
-    )
+    );
 }
+
 //Hace cada vez que se actualiza la pagina
 export async function getServerSideProps({ }) {
     const res = await fetch(mockURL+'/1');
     const data = await res.json();
     const { id, userInfo, token, expires } = data
     return { props: { id, userInfo, token, expires } };
-  }
+}
