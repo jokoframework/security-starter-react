@@ -25,5 +25,54 @@
             "infoUser": "Informacion de usuario: Cesar Torras",
             "token": "mno"
         }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "name": "Alain Vega",
+            "email": "av@example.com",
+            "pass": "xdadwasdwa"
+        },
+        {
+            "id": 2,
+            "name": "Alain Vega",
+            "email": "email de: Mathias Martinez",
+            "pass": "ddadwasdwaadaw"
+        },
+        {
+            "id": 3,
+            "email": "email de: Rodrigo Villalba",
+            "pass": "cadwasd3rwa"
+        },
+        {
+            "id": 4,
+            "email": "email de: Nelson Canatta",
+            "pass": "badwasdwaawd12"
+        },
+        {
+            "id": 5,
+            "email": "email de: Cesar Torras",
+            "pass": "1a11dwasdwa"
+        },
+        {
+            "id": 6,
+            "email": "QuieroCabecearUnColectico@sodep.com",
+            "password": "$2a$10$.dQ3JniY.lgXqx2jaD1wW.D87s5Ty9BR8oc.97U3JdG9nbydj2eBS"
+        },
+        {
+            "id": 7,
+            "email": "ala@A",
+            "password": "$2a$10$cnERtqjTa6J2mUdaO5sy.eFQid5tl.HRC0f11XL7JhB8MaeEwDkTS"
+        },
+        {
+            "id": 8,
+            "email": "a@a.com",
+            "password": "$2a$10$UMgLJRuyYTfw49EqvuwGse10ofWMeUNtLhr3dwJ7b1Y0BGVopn0RC"
+        },
+        {
+            "id": 9,
+            "email": "a@a",
+            "password": "$2a$10$b5yzsl2SjfpTEwmriidJA.zAx6AoU63qBdNRFZObwu9W7wp2Z1EGC"
+        }
     ]
 }
