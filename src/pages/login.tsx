@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { LogIn } from "react-feather"
-import imagen from '../../images/modelo.jpg'
+import imagen from '../../public/images/modelo.jpg'
 
 //Url del json server
 const mockURL = process.env.MOCK_URL
@@ -49,6 +49,12 @@ export default function Login( {id, userInfo, token, expires}: {id: number, user
         </>
     );
 }
+
+/*TODO:
+1. Devolver el token cuando el usuario inicia sesion (verificar email y pass consultandole al json-server)
+2. Investigar como usar el storage del navegador para guardar el token alli
+3. Cuando el login es exitoso, llevar a la pagina inicial (falta verificar el email y pass para hacer esto)
+ */
 
 //Hace cada vez que se actualiza la pagina
 export async function getServerSideProps({ }) {
