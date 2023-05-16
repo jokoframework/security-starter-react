@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { LogIn } from "react-feather"
-import imagen from '../../images/modelo.jpg'
+import imagen from '../../public/images/modelo.jpg'
 //Pagina de login para los usuarios.
 export default function Login() {
     return (

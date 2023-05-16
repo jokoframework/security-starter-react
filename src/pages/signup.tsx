@@ -1,7 +1,7 @@
 import Link from "next/link"
 import React, { useState } from "react"
 import Image from "next/image"
-import imagen from '../../images/desk_image1.jpg'
+import imagen from '../../public/images/desk_image1.jpg'
 import { User, UserPlus } from "react-feather"
 //Pagina de registro para los usuarios.
 export default function Signup() {
