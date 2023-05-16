@@ -111,6 +111,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               }}
             >
               <User className="inline-block" />
+              <div className="px-4 text-lg">Dashboard</div>
             </SidebarItem>
           </Link>
           <Link href="/item1" passHref>
@@ -123,6 +124,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               }}
             >
               <Upload className="inline-block" />
+              <div className="px-4 text-lg">Apps</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -140,6 +142,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               }}
             >
               <Clipboard className="inline-block" />
+              <div className="px-4 text-lg">To-Do</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -157,6 +160,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               }}
             >              
               <Settings className="inline-block" />
+              <div className="px-4 text-lg">Settings</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -187,8 +191,7 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
       "hover:cursor-pointer px-2 py-2 rounded-md flex items-center"}
       onClick={() => setSelectedModule(moduleData)}
     >
-     { children }
-     <div className="px-4 text-lg">{moduleData.name}</div>
+      { children }
     </li>
   )
 }
