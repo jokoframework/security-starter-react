@@ -62,10 +62,8 @@ function CollapsedSidebar({ selectedModule, setSelectedModule, isSidebarCollapse
   isSidebarCollapsed: boolean,
   setSidebarCollapsed: Function,
 }) {
-  if (isSidebarCollapsed == true) {
-    return(
-      <></>
-    )
+  if (isSidebarCollapsed === true) {
+    return null
   }
   else {
     return(
