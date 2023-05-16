@@ -14,7 +14,6 @@ type Module = {
   name: string
 }
 
-
 /**
  * Layout principal del proyecto.  
  * Actualmente esta divido en 4 partes: CollapsedSidebar, Sidebar, Header y Content.  
@@ -115,7 +114,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               <User className="inline-block" />
             </SidebarItem>
           </Link>
-          <Link href="/item1" passHref>
+          <Link href="/usuarios" passHref>
             <SidebarItem
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
