@@ -1,0 +1,61 @@
+{
+    "activeUser": [
+        {
+            "id": 1,
+            "userInfo": "Informacion de usuario: Alain Vega",
+            "token": "abc",
+            "expires": "20/05/2023"
+        },
+        {   
+            "id": 2,
+            "userInfo": "Informacion de usuario: Mathias Martinez",
+            "token": "def",
+            "expires": "21/05/2023"
+        },
+        {   
+            "id": 3,
+            "userInfo": "Informacion de usuario: Rodrigo Villalba",
+            "token": "ghi",
+            "expires": "22/05/2023"
+        },
+        {   
+            "id": 4,
+            "userInfo": "Informacion de usuario: Nelson Canatta",
+            "token": "jkl",
+            "expires": "23/05/2023"
+        },
+        {   
+            "id": 5,
+            "userInfo": "Informacion de usuario: Cesar Torras",
+            "token": "mno",
+            "expires": "24/05/2023"
+        }
+    ],
+    "user" : [
+        {
+            "id": 1,
+            "email": "email de: Alain Vega",
+            "pass": "xdadwasdwa"
+        },
+        {   
+            "id": 2,
+            "email": "email de: Mathias Martinez",
+            "pass": "ddadwasdwaadaw"
+        },
+        {   
+            "id": 3,
+            "email": "email de: Rodrigo Villalba",
+            "pass": "cadwasd3rwa"
+        },
+        {   
+            "id": 4,
+            "email": "email de: Nelson Canatta",
+            "pass": "badwasdwaawd12"
+        },
+        {   
+            "id": 5,
+            "email": "email de: Cesar Torras",
+            "pass": "1a11dwasdwa"
+        }
+    ]
+}

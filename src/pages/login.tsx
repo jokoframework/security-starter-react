@@ -2,14 +2,23 @@ import Link from "next/link"
 import Image from "next/image"
 import { LogIn } from "react-feather"
 import imagen from '../../images/modelo.jpg'
-//Pagina de login para los usuarios.
-export default function Login() {
+
+//Url del json server
+const mockURL = process.env.MOCK_URL
+
+export default function Login( {id, userInfo, token, expires}: {id: number, userInfo: string, token: string, expires: string} ) {
+
+    function showDB() {
+        alert('id: '+id+'\nuserInfo: '+userInfo+'\ntoken: '+token+'\nexpires: '+expires);
+    }
+
+    //Pagina de login para los usuarios.
     return (
         <>
             <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 bg-neutral-150 selection:bg-lila selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
-                    <form className=" min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl"> {/* TODO: ver donde enviar esto */}
-                        <LogIn size={150} color="#4f46e5"></LogIn>
+                    <form action="/" className=" min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl">
+                        <LogIn size={150} color="#4f46e5" onClick={showDB} className=" hover:cursor-pointer"></LogIn>
                         <h1 className="text-3xl font-black">
                             Inicie sesion
                         </h1>
@@ -40,3 +49,10 @@ export default function Login() {
         </>
     )
 }
+//Hace cada vez que se actualiza la pagina
+export async function getServerSideProps({ }) {
+    const res = await fetch(mockURL+'/1');
+    const data = await res.json();
+    const { id, userInfo, token, expires } = data
+    return { props: { id, userInfo, token, expires } };
+  }
