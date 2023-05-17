@@ -404,6 +404,16 @@
       "email": "1@1",
       "password": "$2a$10$zq0vmdZtfi2vE05XjTOCv.8SOC.SttykWI84r3Zk2OzhBRS9kBGyu",
       "id": 81
+    },
+    {
+      "email": "uca@uca",
+      "password": "$2a$10$IZ8bxukQO7RVEwSM0tLWb.qvacUB.ddVj4QNb5NIx8cXtzIz0705O",
+      "id": 82
+    },
+    {
+      "email": "una@una",
+      "password": "$2a$10$L3ahPZ.PAy9zfCLelqFdvul37P.LIVPPM0HyLqTBUVGdBHSUwNjI6",
+      "id": 83
     }
   ]
 }

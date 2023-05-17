@@ -45,6 +45,7 @@ export default function Login() {
             let token = responseJson.accessToken
             //console.log(token)
             localStorage.setItem("accessToken", token)
+            localStorage.setItem("email", email)
         } catch (error) {
             alert("Ocurrio un problema con el servidor, intente de nuevo en unos instantes...")
             return error
@@ -88,3 +89,5 @@ export default function Login() {
         </>
     );
 }
+
+//json-server db.json -m ./node_modules/json-server-auth --port 3001

@@ -59,6 +59,7 @@ export default function Signup() {
             let token = responseJson.accessToken
             //console.log(token)
             localStorage.setItem("accessToken", token)
+            localStorage.setItem("email", email)
         } catch (error) {
             alert("Ocurrio un problema con el servidor, intente de nuevo en unos instantes...\n"+ error)
             return error
