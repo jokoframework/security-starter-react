@@ -2,14 +2,53 @@ import Link from "next/link"
 import Image from "next/image"
 import { LogIn } from "react-feather"
 import imagen from '../../public/images/modelo.jpg'
-
+import React, { useState } from "react"
+import { useRouter } from "next/router"
 //Url del json server
-const mockURL = process.env.MOCK_URL
+const mockURL = process.env.NEXT_PUBLIC_MOCK_ACTIVE_USER_URL
 
-export default function Login( {id, userInfo, token, expires}: {id: number, userInfo: string, token: string, expires: string} ) {
+export default function Login() {
+    const router = useRouter();
+    const [email, setEmail] = useState('') //email, seteador
+    const [pass, setPass] = useState('') //contra, seteador
+    ////Objeto que sirve para enviar en el body de la API fetch
+    const data = { 
+        email: email, 
+        password: pass
+    }
 
-    function showDB() {
-        alert('id: '+id+'\nuserInfo: '+userInfo+'\ntoken: '+token+'\nexpires: '+expires);
+    function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setEmail(event.target.value)
+    }
+
+    function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setPass(event.target.value)
+    }
+
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault() //evito que el formulario se envíe de una
+        try {
+            let response = await fetch(mockURL, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers:{
+                  'Content-Type': 'application/json'
+                }
+              })
+            if (response.ok) {
+                alert("Inicio de sesion exitoso")
+                router.push('/')
+            } else {
+                alert("Ocurrio un problema al iniciar sesion, por favor, intente de nuevo...")
+            }
+            let responseJson = await response.json()
+            let token = responseJson.accessToken
+            //console.log(token)
+            localStorage.setItem("accessToken", token)
+        } catch (error) {
+            alert("Ocurrio un problema con el servidor, intente de nuevo en unos instantes...")
+            return error
+        }
     }
 
 //Pagina de login para los usuarios.
@@ -17,17 +56,17 @@ export default function Login( {id, userInfo, token, expires}: {id: number, user
         <>
             <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 bg-neutral-150 selection:bg-lila selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
-                    <form action="/" className=" min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl">
-                        <LogIn size={150} color="#4f46e5" onClick={showDB} className=" hover:cursor-pointer"></LogIn>
+                    <form onSubmit={handleSubmit} action="/" className=" min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl">
+                        <LogIn size={150} color="#4f46e5" className=" hover:cursor-pointer"></LogIn>
                         <h1 className="text-3xl font-black">
                             Inicie sesion
                         </h1>
                         <label className="min-w-full pt-2 pb-2">Introduzca su email:
-                            <input type="email" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" 
+                            <input onChange={handleEmailChange} type="email" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" 
                             required placeholder="ejemplo@ejemplo.com"></input>
                         </label>
                         <label className="min-w-full pt-2 pb-2">Introduzca su contraseña: 
-                            <input type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" required placeholder="**********"></input>
+                            <input onChange={handlePasswordChange} type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" required placeholder="**********"></input>
                         </label>
                         <div className="min-w-full flex justify-around"> 
                             <label className="flex items-center hover:cursor-pointer"> {/* Accent-color creo que no soportan todos los navegadores, investigar */}
@@ -48,18 +87,4 @@ export default function Login( {id, userInfo, token, expires}: {id: number, user
             </div>
         </>
     );
-}
-
-/*TODO:
-1. Devolver el token cuando el usuario inicia sesion (verificar email y pass consultandole al json-server)
-2. Investigar como usar el storage del navegador para guardar el token alli
-3. Cuando el login es exitoso, llevar a la pagina inicial (falta verificar el email y pass para hacer esto)
- */
-
-//Hace cada vez que se actualiza la pagina
-export async function getServerSideProps({ }) {
-    const res = await fetch(mockURL+'/1');
-    const data = await res.json();
-    const { id, userInfo, token, expires } = data
-    return { props: { id, userInfo, token, expires } };
 }
