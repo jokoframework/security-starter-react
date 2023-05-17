@@ -1,7 +1,8 @@
 import process from "process"
+import { Key } from "react"
 
 type User = {
-  id: Number
+  id: Key
   name: String
   username: String
   email: String
@@ -15,7 +16,7 @@ export async function getServerSideProps() {
   }
 }
 
-export default function UsersTable({ data }) {
+export default function UsersTable({ data }: { data: User[] }) {
   return (
     <table className="table-auto">
       <thead>
@@ -26,7 +27,7 @@ export default function UsersTable({ data }) {
         </tr>
       </thead>
       <tbody>
-        {data.map((user) => (
+        {data.map((user: User) => (
           <tr key={user.id}>
             <td>{user.name}</td>
             <td>{user.username}</td>
