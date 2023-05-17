@@ -12,8 +12,14 @@ module.exports = {
     extend: {
       colors: {
         blue: {
+          450: '#e5f3fe',
           900: '#00152a',
         },
+        neutral: {
+          150: '#f7f7f7',
+          450: '#969696',
+        },
+        lila: '#4f46e5',
       },
     },
   },
