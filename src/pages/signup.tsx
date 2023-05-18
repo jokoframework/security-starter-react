@@ -4,8 +4,7 @@ import Image from "next/image"
 import imagen from '../../public/images/desk_image1.jpg'
 import { UserPlus } from "react-feather"
 import { useRouter } from 'next/router';
-//Pagina de registro para los usuarios.
-
+//Url del json server
 const mockURL = process.env.NEXT_PUBLIC_MOCK_USER_URL
 
 export default function Signup() {
@@ -14,33 +13,33 @@ export default function Signup() {
     const [pass1, setPass1] = useState('') //contra 1, seteador
     const [pass2, setPass2] = useState('') //contra 2, seteador
     const [email, setEmail] = useState('') //email, seteador
-    //TODO: hacer que los handle de passwd sean de onChange.
-    /*  Maneja el evento de que cuando el input de contrasenha1 se "desenfoque" setea el valor de la contrasenha1 */
+     //Objeto que sirve para enviar en el body de la API fetch
+     const data = { 
+        email: email, 
+        password: pass1 
+    }
+    /*  Maneja el evento de que cuando el input de contra1 se cambia, setea el valor de pass1 */
     function handlePassword1Change(event: React.ChangeEvent<HTMLInputElement>){
         setPass1(event.target.value)
     }
-    /*  Maneja el evento de que cuando el input de contrasenha2 se "desenfoque" setea el valor de la contrasenha2 */
+    /*  Maneja el evento de que cuando el input de contra2 se cambia, setea el valor de pass2 */
     function handlePassword2Change(event: React.ChangeEvent<HTMLInputElement>){
         setPass2(event.target.value)
     }
-
+    /*  Maneja el evento de que cuando el input de email se cambia, setea el valor de email */
     function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>){
         setEmail(event.target.value)
     }
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault() //evito que el formulario se envíe de una
-        //Objeto que sirve para enviar en el body de la API fetch
-        const data = { 
-            email: email, 
-            password: pass1 
-        }
         //Verificacion de contras, si no son iguales se notifica
         if (pass1 != pass2) {
             alert("Las contras no coinciden, intente de nuevo.")
             return false
         }
-        try {
+        //Mando los datos al json server
+        try { 
             let response = await fetch(mockURL, {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -48,30 +47,31 @@ export default function Signup() {
                   'Content-Type': 'application/json'
                 }
               })
+            let responseJson = await response.json()
+            //Validaciones para notificar al usuario
             if (response.ok) {
                 alert("Registro exitoso, usuario creado")
                 router.push('/')
+            } else if (typeof responseJson === 'string') {
+                 alert("Ocurrio un problema al crear el usuario\n\n"+responseJson)
             } else {
-                alert("Ocurrio un problema al crear el usuario, por favor, intente de nuevo...")
+                alert("Ocurrio un problema al iniciar sesion, por favor, intente de nuevo...")
             }
             //para recuperar el access token y guardarlo en el storage del browser
-            let responseJson = await response.json()
             let token = responseJson.accessToken
-            //console.log(token)
-            localStorage.setItem("accessToken", token)
-            localStorage.setItem("email", email)
+            localStorage.setItem("accessToken", token) //guardo el access token en el storage del browser
+            localStorage.setItem("email", email) //guardo el email en el storage del browser
         } catch (error) {
             alert("Ocurrio un problema con el servidor, intente de nuevo en unos instantes...\n"+ error)
             return error
         }
     }
-
+    //Pagina de registro para los usuarios.
     return ( 
         <>
             <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 bg-neutral-150 selection:bg-lila selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
                     <form onSubmit={handleSubmit} className="min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl"> 
-                    {/* TODO: ver donde enviar esto */}
                         <UserPlus size={150} color="#4f46e5"></UserPlus>
                         <h1 className="text-3xl font-black">
                             Registrarse
@@ -103,4 +103,4 @@ export default function Signup() {
     )
 }
 
-//TODO: revisar el todo el codigo, hay cosas que sobran
+//json-server db.json -m ./node_modules/json-server-auth --port 3001

@@ -414,6 +414,16 @@
       "email": "una@una",
       "password": "$2a$10$L3ahPZ.PAy9zfCLelqFdvul37P.LIVPPM0HyLqTBUVGdBHSUwNjI6",
       "id": 83
+    },
+    {
+      "email": "alainjosev12121z@gmail.com",
+      "password": "$2a$10$5o7loVUqBhSiHjrBH.yb0eirMo.qU0MlqzPQIfx2fhYFxEmRciaGa",
+      "id": 84
+    },
+    {
+      "email": "alainjose121121vz@gmail.com",
+      "password": "$2a$10$x95aOaM8WMI6JdmNQKd/rOTb42X7kruKIuU6ut.yGA9dyV9wF7rWq",
+      "id": 85
     }
   ]
 }

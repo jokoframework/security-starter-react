@@ -27,6 +27,7 @@ export default function Login() {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault() //evito que el formulario se envíe de una
+        //Mando los datos al json server
         try {
             let response = await fetch(mockURL, {
                 method: 'POST',
@@ -35,17 +36,20 @@ export default function Login() {
                   'Content-Type': 'application/json'
                 }
               })
+            let responseJson = await response.json()
+            //Validaciones para notificar al usuario
             if (response.ok) {
                 alert("Inicio de sesion exitoso")
                 router.push('/')
+            } else if (typeof responseJson === 'string') {
+                alert("Ocurrio un problema al iniciar sesion, por favor, intente de nuevo...\n\n"+responseJson)
             } else {
                 alert("Ocurrio un problema al iniciar sesion, por favor, intente de nuevo...")
             }
-            let responseJson = await response.json()
+            //para recuperar el access token y guardarlo en el storage del browser
             let token = responseJson.accessToken
-            //console.log(token)
-            localStorage.setItem("accessToken", token)
-            localStorage.setItem("email", email)
+            localStorage.setItem("accessToken", token) //guardo el access token en el storage del browser
+            localStorage.setItem("email", email) //guardo el email en el storage del browser
         } catch (error) {
             alert("Ocurrio un problema con el servidor, intente de nuevo en unos instantes...")
             return error
