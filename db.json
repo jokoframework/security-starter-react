@@ -1,36 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "email": "email de: Alain Vega",
-      "pass": "xdadwasdwa"
-    },
-    {
-      "id": 2,
-      "email": "email de: Mathias Martinez",
-      "pass": "ddadwasdwaadaw"
-    },
-    {
-      "id": 3,
-      "email": "email de: Rodrigo Villalba",
-      "pass": "cadwasd3rwa"
-    },
-    {
-      "id": 4,
-      "email": "email de: Nelson Canatta",
-      "pass": "badwasdwaawd12"
-    },
-    {
-      "id": 5,
-      "email": "email de: Cesar Torras",
-      "pass": "1a11dwasdwa"
-    },
-    {
-      "email": "QuieroCabecearUnColectico@sodep.com",
-      "password": "$2a$10$.dQ3JniY.lgXqx2jaD1wW.D87s5Ty9BR8oc.97U3JdG9nbydj2eBS",
-      "id": 6
-    },
-    {
       "email": "ala@A",
       "password": "$2a$10$cnERtqjTa6J2mUdaO5sy.eFQid5tl.HRC0f11XL7JhB8MaeEwDkTS",
       "id": 7
@@ -51,7 +21,7 @@
       "id": 10
     },
     {
-      "email": "Quier`oCabecearUnColectico@sodep.com",
+      "email": "mathias@a.com",
       "password": "$2a$10$4pcYvcID4.uJNPIFt6aI2OrghPDWSirOVw6STHz/az8BgAuFzGJc2",
       "id": 11
     },
@@ -424,6 +394,11 @@
       "email": "alainjose121121vz@gmail.com",
       "password": "$2a$10$x95aOaM8WMI6JdmNQKd/rOTb42X7kruKIuU6ut.yGA9dyV9wF7rWq",
       "id": 85
+    },
+    {
+      "email": "testing@xd",
+      "password": "$2a$10$TybHvH.SMhCtfqSZWa7Kf.NbfdSZf86eOVKkVNXBxuTeVlidySQMm",
+      "id": 86
     }
   ]
 }
