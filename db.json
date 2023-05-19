@@ -439,33 +439,11 @@
       "email": "nuevo@ejemplo.com",
       "password": "$2a$10$7x4PXqpA2YhXlF9aa/tOIOU2Tro6iEYvnJKI9464j70MzpS4f2pQi",
       "id": 87
-    }
-  ],
-  "tokens": [
+    },
     {
-      "id": 1,
-      "infoUser": "Informacion de usuario: Alain Vega",
-      "token": "abc"
-    },
-    {   
-      "id": 2,
-      "infoUser": "Informacion de usuario: Mathias Martinez",
-      "token": "def"
-    },
-    {   
-      "id": 3,
-      "infoUser": "Informacion de usuario: Rodrigo Villalba",
-      "token": "ghi"
-    },
-    {   
-      "id": 4,
-      "infoUser": "Informacion de usuario: Nelson Canatta",
-      "token": "jkl"
-    },
-    {   
-      "id": 5,
-      "infoUser": "Informacion de usuario: Cesar Torras",
-      "token": "mno"
+      "email": "alainjosev3123123z@gmail.com",
+      "password": "$2a$10$cGL3LRVoPMIYEf4JlbItLui4emE6RK3fIU.hSpQDK75zzd3Y35vGO",
+      "id": 88
     }
   ]
 }
