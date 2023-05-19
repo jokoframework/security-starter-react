@@ -77,6 +77,5 @@ NEXT_PUBLIC_MOCK_ACTIVE_USER_URL=http://localhost:3001/login
 ```
 ## 3. Correr el servidor:
 ```
-json-server db.json -m ./node_modules/json-server-auth --port 3001
+npm run mockdb
 ```
-### Observacion: Si el puerto 3001 esta ocupado, cambiar el puerto a alguno disponible, tanto en las variables de entorno como en el comando para correr el servidor json. 
