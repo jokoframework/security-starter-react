@@ -1,6 +1,41 @@
 {
   "users": [
     {
+      "id": 1,
+      "name": "Lee Robinson",
+      "username": "@leerob",
+      "email": "lee@varcel.com",
+      "pass": "xdadwasdwa"
+    },
+    {
+      "id": 2,
+      "name": "Leanne Graham",
+      "username": "@leanne",
+      "email": "leanne@gmail.com",
+      "pass": "ddadwasdwaadaw"
+    },
+    {
+      "id": 3,
+      "name": "Ervin Howell",
+      "username": "@ervin",
+      "email": "ervin@gmail.com",
+      "pass": "cadwasd3rwa"
+    },
+    {
+      "id": 4,
+      "name": "Clementine Bauch",
+      "username": "@clementine",
+      "email": "clementine@gmail.com",
+      "pass": "badwasdwaawd12"
+    },
+    {
+      "id": 5,
+      "name": "Glenna Reichert",
+      "username": "@glenna",
+      "email": "glenna@gmail.com",
+      "pass": "1a11dwasdwa"
+    },
+    {
       "email": "ala@A",
       "password": "$2a$10$cnERtqjTa6J2mUdaO5sy.eFQid5tl.HRC0f11XL7JhB8MaeEwDkTS",
       "id": 7
@@ -404,6 +439,33 @@
       "email": "nuevo@ejemplo.com",
       "password": "$2a$10$7x4PXqpA2YhXlF9aa/tOIOU2Tro6iEYvnJKI9464j70MzpS4f2pQi",
       "id": 87
+    }
+  ],
+  "tokens": [
+    {
+      "id": 1,
+      "infoUser": "Informacion de usuario: Alain Vega",
+      "token": "abc"
+    },
+    {   
+      "id": 2,
+      "infoUser": "Informacion de usuario: Mathias Martinez",
+      "token": "def"
+    },
+    {   
+      "id": 3,
+      "infoUser": "Informacion de usuario: Rodrigo Villalba",
+      "token": "ghi"
+    },
+    {   
+      "id": 4,
+      "infoUser": "Informacion de usuario: Nelson Canatta",
+      "token": "jkl"
+    },
+    {   
+      "id": 5,
+      "infoUser": "Informacion de usuario: Cesar Torras",
+      "token": "mno"
     }
   ]
 }
