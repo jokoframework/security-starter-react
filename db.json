@@ -399,6 +399,11 @@
       "email": "testing@xd",
       "password": "$2a$10$TybHvH.SMhCtfqSZWa7Kf.NbfdSZf86eOVKkVNXBxuTeVlidySQMm",
       "id": 86
+    },
+    {
+      "email": "nuevo@ejemplo.com",
+      "password": "$2a$10$7x4PXqpA2YhXlF9aa/tOIOU2Tro6iEYvnJKI9464j70MzpS4f2pQi",
+      "id": 87
     }
   ]
 }
