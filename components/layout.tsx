@@ -109,7 +109,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
                 name: 'Dashboard',
               }}
             >
-              <User className="inline-block" />
+              <BarChart2 className="inline-block" />
               <div className="px-4 text-lg">Dashboard</div>
             </SidebarItem>
           </Link>
@@ -122,7 +122,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
                 name: 'Usuarios',
               }}
             >
-              <Upload className="inline-block" />
+              <User className="inline-block" />
               <div className="px-4 text-lg">Apps</div>
             </SidebarItem>
           </Link>
