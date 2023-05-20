@@ -37,20 +37,21 @@ export async function getServerSideProps({ query }: { query: Query }) {
   const res = await fetch(queryurl)
   // ! El header de link es proveido por el json-server
   const linkregex = /<(?<link>.+)>;\srel="(?<key>\w+)"/
-  const links = res.headers.get('link')!.split(',')
   let linkObject = {}
-  links.map((link) => {
-    let matches = link.match(linkregex)
-    let url = new URL(matches?.groups!.link)
-    linkObject[matches?.groups!.key] = "/usuarios" + url.search
-    if(matches?.groups!.key === "last") {
-      linkObject["lastPage"] = url.searchParams.get("_page")
-    }
-  })
-  linkObject["currentPage"] = query._page ? query._page : 1
-  linkObject["firstPage"] = 1
-  //linkObject["lastPage"] = linkObject.last 
-  console.log(linkObject)
+  let linkHeader = res.headers.get('link')
+  if (linkHeader) {
+    const links = linkHeader.split(',')
+    links.map((link) => {
+      let matches = link.match(linkregex)
+      let url = new URL(matches?.groups!.link)
+      linkObject[matches?.groups!.key] = "/usuarios" + url.search
+      if(matches?.groups!.key === "last") {
+        linkObject["lastPage"] = url.searchParams.get("_page")
+      }
+    })
+    linkObject["currentPage"] = query._page ? query._page : 1
+    linkObject["firstPage"] = 1
+  }
   const data = await res.json()
   return {
     props: { 
@@ -74,7 +75,7 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
           <Search size={20} color="gray" className="inline-block ml-2" />
         </div>
         <input 
-          onChange={e => router.replace(`${window.location.pathname}?q=${e.currentTarget.value}`)} 
+          onChange={e => router.replace(`${window.location.pathname}?name_like=${e.currentTarget.value}`)} 
           className="block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm lg:text-lg"
           placeholder="Buscar por nombre..."
         />
@@ -111,22 +112,13 @@ function PaginationControls({ paginationData }) {
   return(
     <>
       <div className="flex items-center">
-        <ChevronsLeft className="inline-block border" onClick={() => router.replace(paginationData.first)} />
-        {Object.hasOwn(paginationData, 'prev') ? (
-          <ChevronLeft className="inline-block border" onClick={() => router.replace(paginationData.prev)} />
-        ) :
-          null
-        }
-        <div className="inline-block border">{paginationData.currentPage}</div>
-        {Object.hasOwn(paginationData, 'next') ? (
-          <ChevronRight className="inline-block border" onClick={() => router.replace(paginationData.next)} />
-        ) : 
-          null
-        }
-        <ChevronsRight className="inline-block border" onClick={() => router.replace(paginationData.last)} />
-      </div>
-      <div>
-        Pagina {paginationData.currentPage} de {paginationData.lastPage}
+        <ChevronsLeft size={30} className="inline-block border" onClick={() => Object.hasOwn(paginationData, 'first') ? router.replace(paginationData.first) : null} />
+        <ChevronLeft size={30} className="inline-block border" onClick={() => Object.hasOwn(paginationData, 'prev') ? router.replace(paginationData.prev) : null} />
+        <ChevronRight size={30} className="inline-block border" onClick={() => Object.hasOwn(paginationData, 'next') ? router.replace(paginationData.next) : null} />
+        <ChevronsRight size={30} className="inline-block border" onClick={() => Object.hasOwn(paginationData, 'last') ? router.replace(paginationData.last) : null} />
+        <div className="inline-block">
+          Página {paginationData.currentPage} de {paginationData.lastPage}
+        </div>
       </div>
     </> 
   )
