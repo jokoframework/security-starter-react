@@ -13,6 +13,34 @@ import { useRouter } from 'next/router'
 type Module = {
   id: number
   name: string
+  route: string
+}
+
+interface ModuleObject {
+  [index: string]: Module
+}
+
+const modules: ModuleObject = {
+  "/":  {
+    id: 0,
+    name: "Dashboard",
+    route: "/",
+  },
+  "/usuarios": {
+    id: 1,
+    name: "Usuarios",
+    route: "/usuarios"
+  },
+  "/item1": {
+    id: 2,
+    name: "Item1",
+    route: "/item1"
+  },
+  "/item2": {
+    id: 3,
+    name: "Item2",
+    route: "/item2"
+  },
 }
 
 /**
@@ -23,28 +51,8 @@ type Module = {
  * El sidebar colapsado solo puede ser visto para breakpoints inferiores a md.  
  */
 export default function PageLayout({ children }: { children: React.ReactNode }) {
-  const modules = {
-    "/dashboard": {
-      id: 0,
-      name: "Dashboard",
-    },
-    "/usuarios": {
-      id: 1,
-      name: "Usuarios",
-    },
-    "/item2": {
-      id: 2,
-      name: "Item2",
-    },
-  }
-  useEffect(() => {
-    setSelectedModule(modules[window.location.pathname])
-  }, [])
-  const [selectedModule, setSelectedModule] = useState<Module>({
-      id: 0,
-      name: 'Dashboard',
-    }
-  )
+  const router = useRouter()
+  const [selectedModule, setSelectedModule] = useState<Module>(modules[router.pathname])
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(true)
   return (
     <>
@@ -80,9 +88,7 @@ function CollapsedSidebar({ selectedModule, setSelectedModule, isSidebarCollapse
   setSidebarCollapsed: Function,
 }) {
   if (isSidebarCollapsed == true) {
-    return(
-      <></>
-    )
+    return null
   }
   else {
     return(
@@ -124,24 +130,20 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
             <SidebarItem 
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
-              moduleData={{
-                id: 0,
-                name: 'Dashboard',
-              }}
+              moduleData={modules['/']}
             >
               <BarChart2 className="inline-block" />
+              <div className="px-4 text-lg">Dashboard</div>
             </SidebarItem>
           </Link>
           <Link href="/usuarios" passHref>
             <SidebarItem
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
-              moduleData={{
-                id: 1,
-                name: 'Usuarios',
-              }}
+              moduleData={modules['/usuarios']}
             >
               <User className="inline-block" />
+              <div className="px-4 text-lg">Usuarios</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -149,16 +151,14 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
           <li className="py-2 mx-2">
             Workflows
           </li>
-          <Link href="/item2" passHref>
+          <Link href="/item1" passHref>
             <SidebarItem
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
-              moduleData={{
-                id: 2,
-                name: 'To-Do',
-              }}
+              moduleData={modules['/item1']}
             >
               <Clipboard className="inline-block" />
+              <div className="px-4 text-lg">Workflows</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -170,12 +170,10 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
             <SidebarItem
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
-              moduleData={{
-                id: 3,
-                name: 'Settings',
-              }}
-            >              
+              moduleData={modules['/item2']}
+            >
               <Settings className="inline-block" />
+              <div className="px-4 text-lg">Configuración</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -204,10 +202,9 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
     <li className={(selectedModule.id === moduleData.id ?
       "bg-blue-450 text-black font-bold" : "hover:bg-blue-450 hover:text-black ") +
       "hover:cursor-pointer px-2 py-2 rounded-md flex items-center"}
-      onClick={() => setSelectedModule(moduleData)}
+      onClick={() => {setSelectedModule(moduleData)}}
     >
      { children }
-     <div className="px-4 text-lg">{moduleData.name}</div>
     </li>
   )
 }
