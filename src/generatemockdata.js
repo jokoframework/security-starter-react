@@ -13,7 +13,7 @@ for (let i = 0; i < 1000; i++) {
     lastName: lastName,
   })
   let userData = {
-    name: name + lastName,
+    name: `${name} ${lastName}`,
     email: email,
     username: `@${displayName}`,
     password: faker.internet.password(),

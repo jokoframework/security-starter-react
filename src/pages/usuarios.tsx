@@ -3,6 +3,7 @@ import { Key } from 'react'
 import { Inter } from 'next/font/google'
 import { Search } from 'react-feather'
 import { useRouter } from 'next/router'
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,29 +15,40 @@ type User = {
 }
 
 type Query = {
-  q: string
+  name_like: string
+  _page: string
 }
 
 export async function getServerSideProps({ query }: { query: Query }) {
   // Si el query esta vacio, traer todos los usuarios. Caso contrario, filtrar.
-  const res = (!query.q ? 
-    await fetch(`${process.env.NEXT_PUBLIC_MOCK_USER_URL}?_page=50`) :
-    await fetch(`${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=${query.q}&_page=1`)
-  )
+  let queryurl = ''
+  if (query.name_like && query._page) {
+    queryurl = `${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=${query.name_like}&_page=${query._page}`
+  } 
+  else if (!query.name_like && query._page) {
+    queryurl = `${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=&_page=${query._page}`
+  }
+  else if (query.name_like && !query._page) {
+    queryurl = `${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=${query.name_like}&_page=1`
+  }
+  else {
+    queryurl = `${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=&_page=1`
+  }
+  const res = await fetch(queryurl)
   // ! El header de link es proveido por el json-server
   const linkregex = /<(?<link>.+)>;\srel="(?<key>\w+)"/
   const links = res.headers.get('link')!.split(',')
   let linkObject = {}
   links.map((link) => {
-    let matches = link.match(linkregex);
+    let matches = link.match(linkregex)
     let url = new URL(matches?.groups!.link)
-    linkObject[matches?.groups!.key] = url.pathname + url.search
+    linkObject[matches?.groups!.key] = "/usuarios" + url.search
   })
   const data = await res.json()
   return {
     props: { 
       userData: data,
-      pagingData: linkObject,
+      paginationData: linkObject,
     },
   }
 }
@@ -46,8 +58,7 @@ export async function getServerSideProps({ query }: { query: Query }) {
  * Existe un input para filtrar los usuarios por su nombre y este renderiza la pagina
  * de vuelta con router.replace haciendo que se llame a getServerSideProps() otra vez.
  */
-export default function UsersTable({ userData, pagingData }: { userData: User[] }) {
-  console.log(pagingData)
+export default function UsersTable({ userData, paginationData }: { userData: User[] }) {
   const router = useRouter()
   return (
     <>
@@ -82,13 +93,26 @@ export default function UsersTable({ userData, pagingData }: { userData: User[] 
         </table>
       </div>
       <div className="mx-9 w-1/3 text-left">
-        <div onClick={() => router.replace(pagingData.next)}>
-          Siguiente pagina
-        </div>
-        <div onClick={() => router.replace(pagingData.prev)}>
-          Pagina anterior
-        </div>
+        <PaginationControls paginationData={paginationData} />
       </div>
     </>
+  )
+}
+
+function PaginationControls({ paginationData }) {
+  const router = useRouter()
+  return(
+    <>
+      {Object.hasOwn(paginationData, 'prev') ? (
+        <ChevronLeft className="inline-block" onClick={() => router.replace(paginationData.prev)} />
+      ) :
+        null
+      }
+      {Object.hasOwn(paginationData, 'next') ? (
+        <ChevronRight className="inline-block" onClick={() => router.replace(paginationData.next)} />
+      ) : 
+        null
+      }
+    </> 
   )
 }
