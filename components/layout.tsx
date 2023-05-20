@@ -1,6 +1,7 @@
 import { User, AlignJustify, Target, Clipboard, Settings, X, BarChart2 } from 'react-feather'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 /**
  * Representa informacion de un modulo.
@@ -22,6 +23,23 @@ type Module = {
  * El sidebar colapsado solo puede ser visto para breakpoints inferiores a md.  
  */
 export default function PageLayout({ children }: { children: React.ReactNode }) {
+  const modules = {
+    "/dashboard": {
+      id: 0,
+      name: "Dashboard",
+    },
+    "/usuarios": {
+      id: 1,
+      name: "Usuarios",
+    },
+    "/item2": {
+      id: 2,
+      name: "Item2",
+    },
+  }
+  useEffect(() => {
+    setSelectedModule(modules[window.location.pathname])
+  }, [])
   const [selectedModule, setSelectedModule] = useState<Module>({
       id: 0,
       name: 'Dashboard',
