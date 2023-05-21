@@ -19,9 +19,13 @@ type Query = {
   _page: string
 }
 
+interface LinkObject {
+  [index: string]: string | number
+}
+
 export async function getServerSideProps({ query }: { query: Query }) {
   // Si el query esta vacio, traer todos los usuarios. Caso contrario, filtrar.
-  let queryurl = ''
+  let queryurl: string = ''
   if (query.name_like && query._page) {
     queryurl = `${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=${query.name_like}&_page=${query._page}`
   } 
@@ -37,7 +41,7 @@ export async function getServerSideProps({ query }: { query: Query }) {
   const res = await fetch(queryurl)
   // ! El header de link es proveido por el json-server
   const linkregex = /<(?<link>.+)>;\srel="(?<key>\w+)"/
-  let linkObject = {}
+  let linkObject: LinkObject = {}
   let linkHeader = res.headers.get('link')
   if (linkHeader) {
     const links = linkHeader.split(',')
@@ -46,7 +50,7 @@ export async function getServerSideProps({ query }: { query: Query }) {
       let url = new URL(matches?.groups!.link)
       linkObject[matches?.groups!.key] = "/usuarios" + url.search
       if(matches?.groups!.key === "last") {
-        linkObject["lastPage"] = url.searchParams.get("_page")
+        linkObject["lastPage"] = url.searchParams.get("_page")!
       }
     })
     linkObject["currentPage"] = query._page ? query._page : 1
