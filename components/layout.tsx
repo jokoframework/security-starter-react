@@ -207,24 +207,25 @@ function Header({ selectedModule, setSidebarCollapsed}: {
   selectedModule: Module,
   setSidebarCollapsed: Function,
 }) {
+  const SSR = typeof window === 'undefined' //SSR <-> ServerSideRendering
   return (
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
       <div className="md:hidden flex items-center justify-between">
         <AlignJustify onClick={() => setSidebarCollapsed(false)} />
         <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" />
-        <Link href="/login" passHref><div className="text-right">Login</div></Link>
+        <Link href="/login" onClick={handleClick}>
+          <div className="text-right text-lila">{!SSR ? <p>{LoginLogout()}</p> : <p>Login</p>}</div>
+        </Link>
       </div>
-      <Link href="/login" className="max-md:hidden" passHref><div className="text-right">Login</div></Link>
-      <Link href="/login" onClick={() => {localStorage.removeItem("email"); localStorage.removeItem("accessToken")}}>
-        <div className="text-right text-lila">Logout</div>
+      <Link href="/login" className="max-md:hidden" onClick={handleClick}>
+        <div className="text-right text-lila">{!SSR ? <p>{LoginLogout()}</p> : <p>Login</p>}</div>
       </Link>
       <div className="mx-4 text-3xl font-semibold">
         { selectedModule.name }
       </div>
     </div>
   )
-} {/* TODO: cuando se recargue una pagina que incorpore el layout, mirar si NO hay un token en el storage del browser para
-asi cambiar el texto de login a logout */}
+}
 
 /**
  * Representa el contenido de la pagina que esta siendo visitada actualmente.  
@@ -237,4 +238,33 @@ function Content({ children }: { children: React.ReactNode }) {
       { children }
     </div>
   )
+}
+/**
+ * Mira si un usuario esta logueado
+ * @returns un string "Logout" o "Login"
+ */
+function LoginLogout(): string {
+  return isUserLogged() ? "Logout" : "Login"
+}
+/**
+ * Mira el storage del browser en busca de un token
+ * @returns un booleano que representa si un usuario esta o no logueado
+ */
+function isUserLogged(): boolean {
+  return typeof localStorage.getItem("accessToken") === "string" ? true : false
+}
+
+/**
+ * Sirve para manejar la accion onClick
+ * Limpia el storage del browser solamente cuando existe un usuario logueado
+ */
+function handleClick() {
+  const ServerSideRendering = typeof window === 'undefined'
+  if (!ServerSideRendering && isUserLogged()) { //Lado del cliente y el usuario esta logueado
+    localStorage.removeItem("email")
+    localStorage.removeItem("accessToken")
+    return true //Creo que es innecesario, investigar.
+  } else {
+    return false //Para que el onClick no haga nada
+  }
 }
