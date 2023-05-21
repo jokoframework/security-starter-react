@@ -251,7 +251,7 @@ function LoginLogout(): string {
  * @returns un booleano que representa si un usuario esta o no logueado
  */
 function isUserLogged(): boolean {
-  return typeof localStorage.getItem("accessToken") === "string" ? true : false
+  return typeof localStorage.getItem("accessToken") === "string"
 }
 
 /**
