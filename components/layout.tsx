@@ -34,7 +34,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
         <CollapsedSidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}
           isSidebarCollapsed={isSidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed} />
         <Sidebar classes={"max-md:hidden"} selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
-        <Header selectedModule={selectedModule} setSidebarCollapsed={setSidebarCollapsed} />
+        <Header selectedModule={selectedModule} setSidebarCollapsed={setSidebarCollapsed}/>
         <Content>
           { children }
         </Content>
@@ -203,7 +203,7 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
  * selectedModule: Objeto tipo Module con informacion del modulo actualmente seleccionado.  
  * setSidebarCollapsed: Funcion para cambiar el estado del sidebar a no colapsado.
  */
-function Header({ selectedModule, setSidebarCollapsed }: { 
+function Header({ selectedModule, setSidebarCollapsed}: { 
   selectedModule: Module,
   setSidebarCollapsed: Function,
 }) {
@@ -215,12 +215,16 @@ function Header({ selectedModule, setSidebarCollapsed }: {
         <Link href="/login" passHref><div className="text-right">Login</div></Link>
       </div>
       <Link href="/login" className="max-md:hidden" passHref><div className="text-right">Login</div></Link>
+      <Link href="/login" onClick={() => {localStorage.removeItem("email"); localStorage.removeItem("accessToken")}}>
+        <div className="text-right text-lila">Logout</div>
+      </Link>
       <div className="mx-4 text-3xl font-semibold">
         { selectedModule.name }
       </div>
     </div>
   )
-}
+} {/* TODO: cuando se recargue una pagina que incorpore el layout, mirar si NO hay un token en el storage del browser para
+asi cambiar el texto de login a logout */}
 
 /**
  * Representa el contenido de la pagina que esta siendo visitada actualmente.  
