@@ -4,6 +4,7 @@ import { LogIn } from "react-feather"
 import imagen from '../../public/images/modelo.jpg'
 import React, { useState } from "react"
 import { useRouter } from "next/router"
+import postUser from "../utils/api"
 //Url del json server
 const mockURL = process.env.NEXT_PUBLIC_MOCK_ACTIVE_USER_URL
 
@@ -11,11 +12,6 @@ export default function Login() {
     const router = useRouter();
     const [email, setEmail] = useState('') //email, seteador
     const [pass, setPass] = useState('') //contra, seteador
-    ////Objeto que sirve para enviar en el body de la API fetch
-    const data = { 
-        email: email, 
-        password: pass
-    }
 
     function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
         setEmail(event.target.value)
@@ -27,32 +23,15 @@ export default function Login() {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault() //evito que el formulario se envíe de una
+        ////Objeto que sirve para enviar en el body de la API fetch
+        const data = { 
+            email: email, 
+            password: pass
+        }
         //Mando los datos al json server
-        try {
-            let response = await fetch(mockURL, {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers:{
-                  'Content-Type': 'application/json'
-                }
-              })
-            let responseJson = await response.json()
-            //Validaciones para notificar al usuario
-            if (response.ok) {
-                alert("Inicio de sesion exitoso")
-                router.push('/')
-            } else if (typeof responseJson === 'string') {
-                alert("Ocurrio un problema al iniciar sesion, por favor, intente de nuevo...\n\n"+responseJson)
-            } else {
-                alert("Ocurrio un problema al iniciar sesion, por favor, intente de nuevo...")
-            }
-            //para recuperar el access token y guardarlo en el storage del browser
-            let token = responseJson.accessToken
-            localStorage.setItem("accessToken", token) //guardo el access token en el storage del browser
-            localStorage.setItem("email", email) //guardo el email en el storage del browser
-        } catch (error) {
-            alert("Ocurrio un problema con el servidor, intente de nuevo en unos instantes...")
-            return error
+        let postOK = await postUser(mockURL, data)
+        if (postOK) { //Si el usuario se pudo autenticar, redirigo a la pagina principal.
+            router.push("/")
         }
     }
 
