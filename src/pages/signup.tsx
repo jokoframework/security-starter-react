@@ -14,11 +14,7 @@ export default function Signup() {
     const [pass1, setPass1] = useState('') //contra 1, seteador
     const [pass2, setPass2] = useState('') //contra 2, seteador
     const [email, setEmail] = useState('') //email, seteador
-     //Objeto que sirve para enviar en el body de la API fetch
-     const data = { 
-        email: email, 
-        password: pass1 
-    }
+    
     /*  Maneja el evento de que cuando el input de contra1 se cambia, setea el valor de pass1 */
     function handlePassword1Change(event: React.ChangeEvent<HTMLInputElement>){
         setPass1(event.target.value)
@@ -34,6 +30,11 @@ export default function Signup() {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault() //evito que el formulario se envíe de una
+         //Objeto que sirve para enviar en el body de la API fetch
+        const data = { 
+            email: email, 
+            password: pass1 
+        }
         //Verificacion de contras, si no son iguales se notifica
         if (pass1 != pass2) {
             alert("Las contraseñas no coinciden, por favor intente de nuevo.")
