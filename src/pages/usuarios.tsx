@@ -57,7 +57,6 @@ export async function getServerSideProps({ query }: { query: Query }) {
       }
     })
     linkObject["currentPage"] = (query._page ? query._page : 1).toString()
-    linkObject["firstPage"] = "1"
   }
   const data = await res.json()
   return {
