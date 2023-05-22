@@ -14,17 +14,27 @@ type User = {
   email: String
 }
 
+/**
+ * Representa los query parameters al realizar una busqueda por nombre.  
+ * name_like: Nombre del usuario a la hora de realizar la busqueda.  
+ * _page: Numero de pagina.
+ */
 type Query = {
   name_like: string
   _page: string
 }
 
+/**
+ * Representa el objeto que tiene como llave un string que representa
+ * una pagina dependiendo de su posicion como "first", "last", "next" y "prev".  
+ * El valor es el url que se utiliza para acceder a esa pagina.
+ */
 interface LinkObject {
   [index: string]: string
 }
 
 export async function getServerSideProps({ query }: { query: Query }) {
-  // Si el query esta vacio, traer todos los usuarios. Caso contrario, filtrar.
+  // Si el query esta vacio, traer todos los usuarios. Caso contrario, filtrar dependiendo de los parametros pasados.
   let queryurl: string = ''
   if (query.name_like && query._page) {
     queryurl = `${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=${query.name_like}&_page=${query._page}`
@@ -47,15 +57,17 @@ export async function getServerSideProps({ query }: { query: Query }) {
     const links = linkHeader.split(',')
     links.map((link) => {
       let matches = link.match(linkregex)
-      if (matches === null) {
-        throw "Error"
+      if (typeof matches?.groups === "undefined") {
+        throw "Error: No se encontraron enlaces que cumplan el patron definido en el header."
       }
-      let url = new URL(matches?.groups!.link)
-      linkObject[matches?.groups!.key] = "/usuarios" + url.search
-      if(matches?.groups!.key === "last") {
+      let url = new URL(matches.groups.link)
+      linkObject[matches.groups.key] = "/usuarios" + url.search
+      if(matches.groups.key === "last") {
+        // El get estara definido debido a que se encontro una entrada last en el header.
         linkObject["lastPage"] = url.searchParams.get("_page")!
       }
     })
+    // Convertir a string para seguir con la definicion de LinkObject.
     linkObject["currentPage"] = (query._page ? query._page : 1).toString()
   }
   const data = await res.json()
@@ -113,6 +125,9 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
   )
 }
 
+/**
+ * Componente con los botones para cambiar las paginas. Si alguno de los links no esta definido, el boton no redirecciona.
+ */
 function PaginationControls({ paginationData }: { paginationData: LinkObject }) {
   const router = useRouter()
   return(
