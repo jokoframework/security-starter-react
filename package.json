@@ -30,6 +30,5 @@
     "json-server-auth": "^2.1.0",
     "postcss": "^8.4.22",
     "tailwindcss": "^3.3.1"
-  },
-  "type": "module"
+  }
 }

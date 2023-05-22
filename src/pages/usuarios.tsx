@@ -20,7 +20,7 @@ type Query = {
 }
 
 interface LinkObject {
-  [index: string]: string | number
+  [index: string]: string
 }
 
 export async function getServerSideProps({ query }: { query: Query }) {
@@ -47,14 +47,17 @@ export async function getServerSideProps({ query }: { query: Query }) {
     const links = linkHeader.split(',')
     links.map((link) => {
       let matches = link.match(linkregex)
+      if (matches === null) {
+        throw "Error"
+      }
       let url = new URL(matches?.groups!.link)
       linkObject[matches?.groups!.key] = "/usuarios" + url.search
       if(matches?.groups!.key === "last") {
         linkObject["lastPage"] = url.searchParams.get("_page")!
       }
     })
-    linkObject["currentPage"] = query._page ? query._page : 1
-    linkObject["firstPage"] = 1
+    linkObject["currentPage"] = (query._page ? query._page : 1).toString()
+    linkObject["firstPage"] = "1"
   }
   const data = await res.json()
   return {
@@ -70,7 +73,7 @@ export async function getServerSideProps({ query }: { query: Query }) {
  * Existe un input para filtrar los usuarios por su nombre y este renderiza la pagina
  * de vuelta con router.replace haciendo que se llame a getServerSideProps() otra vez.
  */
-export default function UsersTable({ userData, paginationData }: { userData: User[] }) {
+export default function UsersTable({ userData, paginationData }: { userData: User[], paginationData: LinkObject }) {
   const router = useRouter()
   return (
     <>
@@ -111,7 +114,7 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
   )
 }
 
-function PaginationControls({ paginationData }) {
+function PaginationControls({ paginationData }: { paginationData: LinkObject }) {
   const router = useRouter()
   return(
     <>
