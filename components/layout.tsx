@@ -1,6 +1,6 @@
 import { User, AlignJustify, Target, Clipboard, Settings, X, BarChart2 } from 'react-feather'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 
 /**
@@ -87,7 +87,7 @@ function CollapsedSidebar({ selectedModule, setSelectedModule, isSidebarCollapse
   isSidebarCollapsed: boolean,
   setSidebarCollapsed: Function,
 }) {
-  if (isSidebarCollapsed == true) {
+  if (isSidebarCollapsed === true) {
     return null
   }
   else {
@@ -158,7 +158,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               moduleData={modules['/item1']}
             >
               <Clipboard className="inline-block" />
-              <div className="px-4 text-lg">Workflows</div>
+              <div className="px-4 text-lg">To-Do</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -204,7 +204,7 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
       "hover:cursor-pointer px-2 py-2 rounded-md flex items-center"}
       onClick={() => {setSelectedModule(moduleData)}}
     >
-     { children }
+      { children }
     </li>
   )
 }
