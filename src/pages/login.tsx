@@ -4,9 +4,7 @@ import { LogIn } from "react-feather"
 import imagen from '../../public/images/modelo.jpg'
 import React, { useState } from "react"
 import { useRouter } from "next/router"
-import postUser from "../utils/api"
-import { API_LOGIN_USERS } from "@/utils/constants"
-//Url del json server
+import { loginUser } from "../utils/api"
 
 export default function Login() {
     const router = useRouter();
@@ -29,7 +27,7 @@ export default function Login() {
             password: pass
         }
         //Mando los datos al json server
-        let postOK = await postUser(API_LOGIN_USERS, data)
+        let postOK = await loginUser(data)
         if (postOK) { //Si el usuario se pudo autenticar, redirigo a la pagina principal.
             router.push("/")
         }
@@ -72,5 +70,3 @@ export default function Login() {
         </>
     );
 }
-
-//json-server db.json -m ./node_modules/json-server-auth --port 3001

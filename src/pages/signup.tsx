@@ -4,9 +4,7 @@ import Image from "next/image"
 import imagen from '../../public/images/desk_image1.jpg'
 import { UserPlus } from "react-feather"
 import { useRouter } from 'next/router'
-import postUser from "../utils/api"
-import { API_USERS } from "@/utils/constants"
-//Url del json server
+import {createUser } from "../utils/api"
 
 export default function Signup() {
     const router = useRouter();
@@ -41,7 +39,7 @@ export default function Signup() {
             return false
         }
         //Mando los datos al json server
-        let postOK = await postUser(API_USERS, data)
+        let postOK = await createUser(data)
         if (postOK) { //Si el usuario se creo con exito, redirigo a la pagina principal.
             router.push("/")
         }
@@ -82,5 +80,3 @@ export default function Signup() {
         </>
     )
 }
-
-//json-server db.json -m ./node_modules/json-server-auth --port 3001
