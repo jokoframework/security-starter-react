@@ -98,8 +98,8 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
           placeholder="Buscar por nombre..."
         />
       </div>
-      <div className="bg-white border rounded-lg my-5 mx-9 text-neutral-600">
-        <table className="p-5 px-9 table-fixed w-full border-separate border-spacing-0">
+      <div className="bg-white border rounded-lg my-5 mx-9 p-8 text-neutral-600">
+        <table className="p-5 px-9 table-fixed w-full">
           <thead>
             <tr className="text-left">
               <th className="py-5">Nombre</th>
@@ -108,11 +108,11 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
             </tr>
           </thead>
           <tbody>
-            {userData.map((user: User, i: number, arr: User[]) => (
-              <tr key={user.id}>
-                <td className={(arr.length - 1 !== i ? "border-b-2 " : "") + "py-4"}>{user.name}</td>
-                <td className={(arr.length - 1 !== i ? "border-b-2 " : "") + "py-4"}>{user.username}</td>
-                <td className={(arr.length - 1 !== i ? "border-b-2 " : "") + "py-4"}>{user.email}</td>
+            {userData.map((user: User) => (
+              <tr key={user.id} className="last:border-b-0 border-b-2">
+                <td className={"py-4"}>{user.name}</td>
+                <td className={"py-4"}>{user.username}</td>
+                <td className={"py-4"}>{user.email}</td>
               </tr>
             ))}
           </tbody>
@@ -133,11 +133,11 @@ function PaginationControls({ paginationData }: { paginationData: LinkObject }) 
   return(
     <>
       <div className="flex items-center">
-        <ChevronsLeft size={30} className="inline-block border" onClick={() => Object.hasOwn(paginationData, 'first') ? router.replace(paginationData.first) : null} />
-        <ChevronLeft size={30} className="inline-block border" onClick={() => Object.hasOwn(paginationData, 'prev') ? router.replace(paginationData.prev) : null} />
-        <ChevronRight size={30} className="inline-block border" onClick={() => Object.hasOwn(paginationData, 'next') ? router.replace(paginationData.next) : null} />
-        <ChevronsRight size={30} className="inline-block border" onClick={() => Object.hasOwn(paginationData, 'last') ? router.replace(paginationData.last) : null} />
-        <div className="inline-block">
+        <ChevronsLeft size={30} className="inline-block border" onClick={() => paginationData.first ? router.replace(paginationData.first) : null} />
+        <ChevronLeft size={30} className="inline-block border" onClick={() => paginationData.prev ? router.replace(paginationData.prev) : null} />
+        <ChevronRight size={30} className="inline-block border" onClick={() => paginationData.next ? router.replace(paginationData.next) : null} />
+        <ChevronsRight size={30} className="inline-block border" onClick={() => paginationData.last ? router.replace(paginationData.last) : null} />
+        <div className="inline-block ml-2">
           Página {paginationData.currentPage} de {paginationData.lastPage}
         </div>
       </div>
