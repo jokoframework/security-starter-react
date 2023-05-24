@@ -3,7 +3,8 @@ import React, { useState } from "react"
 import Image from "next/image"
 import imagen from '../../public/images/desk_image1.jpg'
 import { UserPlus } from "react-feather"
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
+import postUser from "../utils/api"
 //Url del json server
 const mockURL = process.env.NEXT_PUBLIC_MOCK_USER_URL
 
@@ -13,11 +14,7 @@ export default function Signup() {
     const [pass1, setPass1] = useState('') //contra 1, seteador
     const [pass2, setPass2] = useState('') //contra 2, seteador
     const [email, setEmail] = useState('') //email, seteador
-     //Objeto que sirve para enviar en el body de la API fetch
-     const data = { 
-        email: email, 
-        password: pass1 
-    }
+    
     /*  Maneja el evento de que cuando el input de contra1 se cambia, setea el valor de pass1 */
     function handlePassword1Change(event: React.ChangeEvent<HTMLInputElement>){
         setPass1(event.target.value)
@@ -33,37 +30,20 @@ export default function Signup() {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault() //evito que el formulario se envíe de una
+         //Objeto que sirve para enviar en el body de la API fetch
+        const data = { 
+            email: email, 
+            password: pass1 
+        }
         //Verificacion de contras, si no son iguales se notifica
         if (pass1 != pass2) {
-            alert("Las contras no coinciden, intente de nuevo.")
+            alert("Las contraseñas no coinciden, por favor intente de nuevo.")
             return false
         }
         //Mando los datos al json server
-        try { 
-            let response = await fetch(mockURL, {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers:{
-                  'Content-Type': 'application/json'
-                }
-              })
-            let responseJson = await response.json()
-            //Validaciones para notificar al usuario
-            if (response.ok) {
-                alert("Registro exitoso, usuario creado")
-                router.push('/')
-            } else if (typeof responseJson === 'string') {
-                 alert("Ocurrio un problema al crear el usuario\n\n"+responseJson)
-            } else {
-                alert("Ocurrio un problema al iniciar sesion, por favor, intente de nuevo...")
-            }
-            //para recuperar el access token y guardarlo en el storage del browser
-            let token = responseJson.accessToken
-            localStorage.setItem("accessToken", token) //guardo el access token en el storage del browser
-            localStorage.setItem("email", email) //guardo el email en el storage del browser
-        } catch (error) {
-            alert("Ocurrio un problema con el servidor, intente de nuevo en unos instantes...\n"+ error)
-            return error
+        let postOK = await postUser(mockURL, data)
+        if (postOK) { //Si el usuario se creo con exito, redirigo a la pagina principal.
+            router.push("/")
         }
     }
     //Pagina de registro para los usuarios.
