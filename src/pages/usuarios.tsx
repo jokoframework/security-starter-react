@@ -106,7 +106,6 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
       return resp.json()
     })
     .then((data) => {
-      console.log(data)
       setData(data)
     })
   }, [page, nameLike, totalCount, limit, lastPage])
@@ -132,18 +131,18 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
             </tr>
           </thead>
           <tbody>
-            {userData.map((user: User) => (
-              <tr key={user.id} className="last:border-b-0 border-b-2">
-                <td className="py-4">{user.name}</td>
-                <td className="py-4">{user.username}</td>
-                <td className="py-4">{user.email}</td>
+            {data.map((d: User) => (
+              <tr key={d.id} className="last:border-b-0 border-b-2">
+                <td className="py-4">{d.name}</td>
+                <td className="py-4">{d.username}</td>
+                <td className="py-4">{d.email}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="mx-9 w-1/3 text-left">
-        <PaginationControls paginationData={paginationData} />
+        <PaginationControls paginationData={paginationData} page={page} lastPage={lastPage} setPage={setPage} />
       </div>
     </>
   )
@@ -152,17 +151,22 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
 /**
  * Componente con los botones para cambiar las paginas. Si alguno de los links no esta definido, el boton no redirecciona.
  */
-function PaginationControls({ paginationData }: { paginationData: LinkObject }) {
+function PaginationControls({ paginationData, page, lastPage, setPage }: { 
+  paginationData: LinkObject,
+  page: number,
+  lastPage: number,
+  setPage: Function,
+}) {
   const router = useRouter()
   return(
     <>
       <div className="flex items-center">
-        <ChevronsLeft size={30} className="inline-block border" onClick={() => paginationData.first ? router.replace(paginationData.first) : null} />
-        <ChevronLeft size={30} className="inline-block border" onClick={() => paginationData.prev ? router.replace(paginationData.prev) : null} />
-        <ChevronRight size={30} className="inline-block border" onClick={() => paginationData.next ? router.replace(paginationData.next) : null} />
-        <ChevronsRight size={30} className="inline-block border" onClick={() => paginationData.last ? router.replace(paginationData.last) : null} />
+        <ChevronsLeft size={30} className="inline-block border" onClick={() => setPage(1)} />
+        <ChevronLeft size={30} className="inline-block border" onClick={() => page <= 1 ? setPage(1) : setPage(page - 1)} />
+        <ChevronRight size={30} className="inline-block border" onClick={() => page >= lastPage ? setPage(lastPage) : setPage(page + 1)} />
+        <ChevronsRight size={30} className="inline-block border" onClick={() => setPage(lastPage)} />
         <div className="inline-block ml-2">
-          Página {paginationData.currentPage} de {paginationData.lastPage}
+          Página {page} de {lastPage}
         </div>
       </div>
     </> 
