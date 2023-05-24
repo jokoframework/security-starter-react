@@ -110,9 +110,9 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
           <tbody>
             {userData.map((user: User) => (
               <tr key={user.id} className="last:border-b-0 border-b-2">
-                <td className={"py-4"}>{user.name}</td>
-                <td className={"py-4"}>{user.username}</td>
-                <td className={"py-4"}>{user.email}</td>
+                <td className="py-4">{user.name}</td>
+                <td className="py-4">{user.username}</td>
+                <td className="py-4">{user.email}</td>
               </tr>
             ))}
           </tbody>
