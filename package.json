@@ -6,13 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "mockdb": "json-server-auth db.json -p 3001"
   },
   "dependencies": {
     "@tremor/react": "^2.6.1",
     "@types/node": "18.15.11",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
+    "dotenv": "^16.0.3",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "next": "13.3.0",
@@ -23,6 +25,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
+    "json-server": "^0.17.3",
+    "json-server-auth": "^2.1.0",
     "postcss": "^8.4.22",
     "tailwindcss": "^3.3.1"
   }

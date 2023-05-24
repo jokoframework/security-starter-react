@@ -1,4 +1,4 @@
-import { User, Upload, AlignJustify, Target, Clipboard, Settings, X } from 'react-feather'
+import { User, AlignJustify, Target, Clipboard, Settings, X, BarChart2 } from 'react-feather'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -13,7 +13,6 @@ type Module = {
   id: number
   name: string
 }
-
 
 /**
  * Layout principal del proyecto.  
@@ -110,20 +109,20 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
                 name: 'Dashboard',
               }}
             >
-              <User className="inline-block" />
+              <BarChart2 className="inline-block" />
               <div className="px-4 text-lg">Dashboard</div>
             </SidebarItem>
           </Link>
-          <Link href="/item1" passHref>
+          <Link href="/usuarios" passHref>
             <SidebarItem
               selectedModule={selectedModule}
               setSelectedModule={setSelectedModule}
               moduleData={{
                 id: 1,
-                name: 'Apps',
+                name: 'Usuarios',
               }}
             >
-              <Upload className="inline-block" />
+              <User className="inline-block" />
               <div className="px-4 text-lg">Apps</div>
             </SidebarItem>
           </Link>

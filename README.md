@@ -59,3 +59,23 @@ Si el ícono AlignJustify es clickeado se cambia el estado del sidebar a no cola
 | setSidebarCollapsed | Function | Requerido | Función para cambiar el estado del sidebar a no colapsado. |
 ### Content
 Representa el contenido de la página que está siendo visitada.  
+# Agregar fake backend
+Nota: Asegurarse de posicionarse en la ruta raiz del proyecto.
+## 1. Instalar lo definido en el package.json:
+```
+npm install
+```
+## 2. Definir variables de entorno.
+### 2.1 Crear el archivo .env.local:
+```
+touch .env.local
+```
+### 2.3 Definir las siguientes dos variables:
+```
+NEXT_PUBLIC_MOCK_USER_URL=http://localhost:3001/users
+NEXT_PUBLIC_MOCK_ACTIVE_USER_URL=http://localhost:3001/login
+```
+## 3. Correr el servidor:
+```
+npm run mockdb
+```
