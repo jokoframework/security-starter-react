@@ -1,8 +1,7 @@
-import { useRouter } from "next/router"
 /**
  * Realiza una peticion a la mockURL con el metodo post, enviando email y password
- * @param mockURL 
- * @param data 
+ * @param mockURL la url a la cual se le va a realizar la peticion
+ * @param data el objeto data, el cual sera enviado en el cuerpo de la peticion
  * @returns true --> hubo exito en la peticion al servidor y se guardo el token y email en el storage del browser.
  *         false --> la peticion no tuvo exito y se le informa al usuario.
  */
