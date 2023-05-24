@@ -2,7 +2,6 @@ import process from 'process'
 import { Key, useEffect } from 'react'
 import { Inter } from 'next/font/google'
 import { Search } from 'react-feather'
-import { useRouter } from 'next/router'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-feather'
 import { useState } from 'react'
 
@@ -34,67 +33,20 @@ interface LinkObject {
   [index: string]: string
 }
 
-export async function getServerSideProps({ query }: { query: Query }) {
-  // Si el query esta vacio, traer todos los usuarios. Caso contrario, filtrar dependiendo de los parametros pasados.
-  let queryurl: string = ''
-  if (query.name_like && query._page) {
-    queryurl = `${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=${query.name_like}&_page=${query._page}`
-  } 
-  else if (!query.name_like && query._page) {
-    queryurl = `${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=&_page=${query._page}`
-  }
-  else if (query.name_like && !query._page) {
-    queryurl = `${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=${query.name_like}&_page=1`
-  }
-  else {
-    queryurl = `${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=&_page=1`
-  }
-  const res = await fetch(queryurl)
-  // ! El header de link es proveido por el json-server
-  const linkregex = /<(?<link>.+)>;\srel="(?<key>\w+)"/
-  let linkObject: LinkObject = {}
-  let linkHeader = res.headers.get('link')
-  if (linkHeader) {
-    const links = linkHeader.split(',')
-    links.map((link) => {
-      let matches = link.match(linkregex)
-      if (typeof matches?.groups === "undefined") {
-        throw "Error: No se encontraron enlaces que cumplan el patron definido en el header."
-      }
-      let url = new URL(matches.groups.link)
-      linkObject[matches.groups.key] = "/usuarios" + url.search
-      if(matches.groups.key === "last") {
-        // El get estara definido debido a que se encontro una entrada last en el header.
-        linkObject["lastPage"] = url.searchParams.get("_page")!
-      }
-    })
-    // Convertir a string para seguir con la definicion de LinkObject.
-    linkObject["currentPage"] = (query._page ? query._page : 1).toString()
-  }
-  const data = await res.json()
-  return {
-    props: { 
-      userData: data,
-      paginationData: linkObject,
-    },
-  }
-}
-
 /**
  * Renderiza la tabla de usuarios leida de db.json.
  * Existe un input para filtrar los usuarios por su nombre y este renderiza la pagina
  * de vuelta con router.replace haciendo que se llame a getServerSideProps() otra vez.
  */
-export default function UsersTable({ userData, paginationData }: { userData: User[], paginationData: LinkObject }) {
-  const router = useRouter()
+export default function UsersTable() {
   const [totalCount, setTotalCount] = useState<number>(0)
-  const [nameLike, setNameLike] = useState<string>("")
-  const [page, setPage] = useState<number>(0)
+  const [nameLike, setNameLike] = useState<string>('')
+  const [page, setPage] = useState<number>(1)
   const [limit, setLimit] = useState<number>(10)
   const [lastPage, setLastPage] = useState<number>(0)
   const [data, setData] = useState([])
-  useEffect(() => {7
-    fetch(`${process.env.NEXT_PUBLIC_MOCK_USER_URL}?_page=${page}&name_like=${nameLike}`)
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_MOCK_USER_URL}?_page=${page}&name_like=${nameLike}&_limit=${limit}`)
     .then((resp) => {
       setTotalCount(Number(resp.headers.get('X-Total-Count')!))
       /**
@@ -142,7 +94,7 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
         </table>
       </div>
       <div className="mx-9 w-1/3 text-left">
-        <PaginationControls paginationData={paginationData} page={page} lastPage={lastPage} setPage={setPage} />
+        <PaginationControls page={page} lastPage={lastPage} setPage={setPage} />
       </div>
     </>
   )
@@ -151,13 +103,11 @@ export default function UsersTable({ userData, paginationData }: { userData: Use
 /**
  * Componente con los botones para cambiar las paginas. Si alguno de los links no esta definido, el boton no redirecciona.
  */
-function PaginationControls({ paginationData, page, lastPage, setPage }: { 
-  paginationData: LinkObject,
+function PaginationControls({ page, lastPage, setPage }: { 
   page: number,
   lastPage: number,
   setPage: Function,
 }) {
-  const router = useRouter()
   return(
     <>
       <div className="flex items-center">
