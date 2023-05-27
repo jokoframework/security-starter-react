@@ -20,8 +20,8 @@ type Query = {
 export async function getServerSideProps({ query }: { query: Query }) {
   // Si el query esta vacio, traer todos los usuarios. Caso contrario, filtrar.
   const res = (!query.q ? 
-    await fetch(`${process.env.NEXT_PUBLIC_MOCK_USER_URL}`) :
-    await fetch(`${process.env.NEXT_PUBLIC_MOCK_USER_URL}?name_like=${query.q}`)
+    await fetch(`${process.env.NEXT_PUBLIC_API_USERS}`) :
+    await fetch(`${process.env.NEXT_PUBLIC_API_USERS}?name_like=${query.q}`)
   )
   const data = await res.json()
   return {

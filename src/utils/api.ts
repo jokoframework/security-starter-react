@@ -1,4 +1,4 @@
-import { API_LOGIN_USERS } from "./constants"
+import { API_AUTH } from "./constants"
 import { API_USERS } from "./constants"
 /**
  * Realiza una peticion a la API_LOGIN_USER con el metodo post, enviando email y password
@@ -8,7 +8,7 @@ import { API_USERS } from "./constants"
  */
 export async function loginUser(data: {email: string, password: string}) {
     try {
-        let response = await fetch(API_LOGIN_USERS, {
+        let response = await fetch(API_AUTH, {
             method: 'POST',
             body: JSON.stringify(data),
             headers:{
