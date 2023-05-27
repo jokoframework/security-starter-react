@@ -58,10 +58,6 @@ export default function Login() {
                         </div>
                         <button type="submit" className="bg-lila text-white rounded-2xl p-2 min-w-full">Iniciar</button>
                     </form>
-                        <p>
-                            <Link href="/" className="hover:font-extrabold">Click aqui</Link> para ir a la pagina principal 
-                            {/* TODO: lo mas probable es que esto tenga que chutar */}
-                        </p>
                 </div>
                 <div className="min-h-full min-w-full flex items-center justify-center max-md:hidden">
                     <Image src={imagen} className='max-h-screen min-h-full object-cover' alt="Imagen"></Image>

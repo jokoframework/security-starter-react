@@ -1,6 +1,7 @@
 import { User, AlignJustify, Target, Clipboard, Settings, X, BarChart2 } from 'react-feather'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 /**
  * Representa informacion de un modulo.
@@ -22,6 +23,11 @@ type Module = {
  * El sidebar colapsado solo puede ser visto para breakpoints inferiores a md.  
  */
 export default function PageLayout({ children }: { children: React.ReactNode }) {
+  const SSR = typeof window === "undefined" //ServerSideRendering
+  const router = useRouter()
+  if (!SSR && !isUserLogged()) { 
+    router.push("/login")
+  }
   const [selectedModule, setSelectedModule] = useState<Module>({
       id: 0,
       name: 'Dashboard',
@@ -214,11 +220,11 @@ function Header({ selectedModule, setSidebarCollapsed}: {
         <AlignJustify onClick={() => setSidebarCollapsed(false)} />
         <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" />
         <Link href="/login" onClick={handleClick}>
-          <div className="text-right text-lila">{!SSR ? <p>{LoginLogout()}</p> : <p>Login</p>}</div>
+          <div className="text-right text-lila">Cerrar sesion</div>
         </Link>
       </div>
       <Link href="/login" className="max-md:hidden" onClick={handleClick}>
-        <div className="text-right text-lila">{!SSR ? <p>{LoginLogout()}</p> : <p>Login</p>}</div>
+        <div className="text-right text-lila">Cerrar sesion</div>
       </Link>
       <div className="mx-4 text-3xl font-semibold">
         { selectedModule.name }
@@ -226,7 +232,6 @@ function Header({ selectedModule, setSidebarCollapsed}: {
     </div>
   )
 }
-
 /**
  * Representa el contenido de la pagina que esta siendo visitada actualmente.  
  * Recibe:  
@@ -238,13 +243,6 @@ function Content({ children }: { children: React.ReactNode }) {
       { children }
     </div>
   )
-}
-/**
- * Mira si un usuario esta logueado
- * @returns un string "Logout" o "Login"
- */
-function LoginLogout(): string {
-  return isUserLogged() ? "Logout" : "Login"
 }
 /**
  * Mira el storage del browser en busca de un token
