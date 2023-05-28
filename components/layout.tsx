@@ -31,16 +31,6 @@ const modules: ModuleObject = {
     name: "Usuarios",
     route: "/usuarios"
   },
-  "/item1": {
-    id: 2,
-    name: "Item1",
-    route: "/item1"
-  },
-  "/item2": {
-    id: 3,
-    name: "Item2",
-    route: "/item2"
-  },
 }
 
 /**
@@ -147,36 +137,6 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
             </SidebarItem>
           </Link>
         </ul>
-        <ul className="w-full px-4">
-          <li className="py-2 mx-2">
-            Workflows
-          </li>
-          <Link href="/item1" passHref>
-            <SidebarItem
-              selectedModule={selectedModule}
-              setSelectedModule={setSelectedModule}
-              moduleData={modules['/item1']}
-            >
-              <Clipboard className="inline-block" />
-              <div className="px-4 text-lg">To-Do</div>
-            </SidebarItem>
-          </Link>
-        </ul>
-        <ul className="w-full px-4">
-          <li className="py-2 mx-2">
-            General
-          </li>
-          <Link href="/item2" passHref>
-            <SidebarItem
-              selectedModule={selectedModule}
-              setSelectedModule={setSelectedModule}
-              moduleData={modules['/item2']}
-            >
-              <Settings className="inline-block" />
-              <div className="px-4 text-lg">Configuración</div>
-            </SidebarItem>
-          </Link>
-        </ul>
       </div>
     </>
   )
@@ -200,7 +160,7 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
 }) {
   return (
     <li className={(selectedModule.id === moduleData.id ?
-      "bg-blue-450 text-black font-bold" : "hover:bg-blue-450 hover:text-black ") +
+      "bg-blue-450 text-black font-semibold " : "hover:bg-blue-450 hover:text-black ") +
       "hover:cursor-pointer px-2 py-2 rounded-md flex items-center"}
       onClick={() => {setSelectedModule(moduleData)}}
     >
