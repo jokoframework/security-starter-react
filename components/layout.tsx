@@ -4,6 +4,11 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import logoJoko from '../public/images/logoJoko.png'
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from '../tailwind.config.js'
+import colors from 'tailwindcss/colors'
+
+const fullConfig = resolveConfig(tailwindConfig)
 
 /**
  * Representa informacion de un modulo.
@@ -126,7 +131,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               setSelectedModule={setSelectedModule}
               moduleData={modules['/']}
             >
-              <BarChart2 className="inline-block" />
+              <BarChart2 color={selectedModule.id == modules['/'].id ? colors.blue[400] : "gray"} className="inline-block" />
               <div className="px-4 text-lg">Dashboard</div>
             </SidebarItem>
           </Link>
@@ -136,7 +141,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               setSelectedModule={setSelectedModule}
               moduleData={modules['/usuarios']}
             >
-              <User className="inline-block" />
+              <User color={selectedModule.id == modules['/usuarios'].id ? colors.blue[400] : "gray"} className="inline-block" />
               <div className="px-4 text-lg">Usuarios</div>
             </SidebarItem>
           </Link>
