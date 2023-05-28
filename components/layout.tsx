@@ -170,7 +170,7 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
   return (
     <li className={(selectedModule.id === moduleData.id ?
       "bg-blue-450 text-black font-semibold " : "hover:bg-blue-450 hover:text-black ") +
-      "hover:cursor-pointer px-2 py-2 rounded-md flex items-center"}
+      "hover:cursor-pointer px-2 py-2 my-2 rounded-md flex items-center"}
       onClick={() => {setSelectedModule(moduleData)}}
     >
       { children }
