@@ -53,7 +53,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(true)
   return (
     <>
-      <div className="static grid grid-rows-12 grid-cols-12 bg-neutral-150">
+      <div className="static grid grid-rows-12 grid-cols-12">
         <CollapsedSidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}
           isSidebarCollapsed={isSidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed} />
         <Sidebar classes={"max-md:hidden"} selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
@@ -115,7 +115,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
   return (
     <>
       <div className={classes + " row-span-4 row-start-1 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450"}>
-        <Link className="py-3 px-4 text-xl flex items-center justify-center" href="/">
+        <Link className="py-3 px-4 text-xl flex items-center justify-center" href="/" onClick={() => setSelectedModule(modules['/'])}>
           <Image
             src={logoJoko}
             alt="Joko Logo"
@@ -131,7 +131,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               setSelectedModule={setSelectedModule}
               moduleData={modules['/']}
             >
-              <BarChart2 color={selectedModule.id == modules['/'].id ? colors.blue[400] : "gray"} className="inline-block" />
+              <BarChart2 color={selectedModule.id == modules['/'].id ? colors.blue[500] : "gray"} className="inline-block" />
               <div className="px-4 text-lg">Dashboard</div>
             </SidebarItem>
           </Link>
@@ -141,7 +141,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               setSelectedModule={setSelectedModule}
               moduleData={modules['/usuarios']}
             >
-              <User color={selectedModule.id == modules['/usuarios'].id ? colors.blue[400] : "gray"} className="inline-block" />
+              <User color={selectedModule.id == modules['/usuarios'].id ? colors.blue[500] : "gray"} className="inline-block" />
               <div className="px-4 text-lg">Usuarios</div>
             </SidebarItem>
           </Link>
@@ -191,7 +191,7 @@ function Header({ selectedModule, setSidebarCollapsed }: {
   setSidebarCollapsed: Function,
 }) {
   return (
-    <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
+    <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4 mt-2 bg-neutral-150 rounded-tl-3xl">
       <div className="md:hidden flex items-center justify-between">
         <AlignJustify onClick={() => setSidebarCollapsed(false)} />
         <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" />
