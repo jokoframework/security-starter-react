@@ -1,7 +1,9 @@
-import { User, AlignJustify, Target, Clipboard, Settings, X, BarChart2 } from 'react-feather'
+import { User, AlignJustify, Target, X, BarChart2 } from 'react-feather'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
+import logoJoko from '../public/images/logoJoko.png'
 
 /**
  * Representa informacion de un modulo.
@@ -108,9 +110,11 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
   return (
     <>
       <div className={classes + " row-span-4 row-start-1 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450"}>
-        <Link className="py-3 px-4 text-xl flex items-center" href="/">
-          <Target size={50} className="border p-1 rounded-xl inline-block" />
-          <p className="px-3 inline-block antialiased text-black font-semibold">Joko Security</p>
+        <Link className="py-3 px-4 text-xl flex items-center justify-center" href="/">
+          <Image
+            src={logoJoko}
+            alt="Joko Logo"
+          />
         </Link>
         <ul className="w-full px-4">
           <li className="py-2 mx-2">
