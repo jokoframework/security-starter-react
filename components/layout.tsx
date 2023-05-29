@@ -114,7 +114,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
 }) {
   return (
     <>
-      <div className={classes + " row-span-4 row-start-1 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450"}>
+      <div className={classes + " row-span-6 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450"}>
         <Link className="py-3 px-4 text-xl flex items-center justify-center" href="/" onClick={() => setSelectedModule(modules['/'])}>
           <Image
             src={logoJoko}
@@ -170,7 +170,7 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
   return (
     <li className={(selectedModule.id === moduleData.id ?
       "bg-blue-450 text-black font-semibold " : "hover:bg-blue-450 hover:text-black ") +
-      "hover:cursor-pointer px-2 py-2 my-2 rounded-md flex items-center"}
+      "hover:cursor-pointer px-3 mx-1 py-2 my-2 rounded-md flex items-center"}
       onClick={() => {setSelectedModule(moduleData)}}
     >
       { children }
@@ -191,7 +191,7 @@ function Header({ selectedModule, setSidebarCollapsed }: {
   setSidebarCollapsed: Function,
 }) {
   return (
-    <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4 mt-2 bg-neutral-150 rounded-tl-3xl">
+    <div className="col-span-12 md:col-span-10 px-4 py-4 mt-2 bg-neutral-150 rounded-tl-3xl">
       <div className="md:hidden flex items-center justify-between">
         <AlignJustify onClick={() => setSidebarCollapsed(false)} />
         <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" />
@@ -212,7 +212,7 @@ function Header({ selectedModule, setSidebarCollapsed }: {
  */
 function Content({ children }: { children: React.ReactNode }) {
   return (
-    <div className="row-span-3 col-span-12 md:col-span-10 h-screen bg-neutral-100">
+    <div className="row-span-11 col-span-12 md:col-span-10 h-screen bg-neutral-100">
       { children }
     </div>
   )
