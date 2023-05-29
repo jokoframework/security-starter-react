@@ -225,17 +225,28 @@ function Header({ selectedModule, setSidebarCollapsed}: {
   selectedModule: Module,
   setSidebarCollapsed: Function,
 }) {
-  const SSR = typeof window === 'undefined' //SSR <-> ServerSideRendering
+  /**
+ * Manejador de la accion onClick que lo llama.
+ * Logica del cierre de sesion.
+ * Limpia el storage del browser solamente cuando existe un usuario logueado.
+ */
+  function handleLogout() {
+    const ServerSideRendering = typeof window === 'undefined'
+    if (!ServerSideRendering && isUserLogged()) { //Lado del cliente y el usuario esta logueado
+      localStorage.removeItem("email")
+      localStorage.removeItem("accessToken")
+    } 
+  }
   return (
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
       <div className="md:hidden flex items-center justify-between">
         <AlignJustify onClick={() => setSidebarCollapsed(false)} />
         <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" />
-        <Link href="/login" onClick={handleClick}>
+        <Link href="/login" onClick={handleLogout}>
           <div className="text-right text-lila">Cerrar sesion</div>
         </Link>
       </div>
-      <Link href="/login" className="max-md:hidden" onClick={handleClick}>
+      <Link href="/login" className="max-md:hidden" onClick={handleLogout}>
         <div className="text-right text-lila">Cerrar sesion</div>
       </Link>
       <div className="mx-4 text-3xl font-semibold">
@@ -262,19 +273,4 @@ function Content({ children }: { children: React.ReactNode }) {
  */
 function isUserLogged(): boolean {
   return typeof localStorage.getItem("accessToken") === "string"
-}
-
-/**
- * Sirve para manejar la accion onClick
- * Limpia el storage del browser solamente cuando existe un usuario logueado
- */
-function handleClick() {
-  const ServerSideRendering = typeof window === 'undefined'
-  if (!ServerSideRendering && isUserLogged()) { //Lado del cliente y el usuario esta logueado
-    localStorage.removeItem("email")
-    localStorage.removeItem("accessToken")
-    return true //Creo que es innecesario, investigar.
-  } else {
-    return false //Para que el onClick no haga nada
-  }
 }

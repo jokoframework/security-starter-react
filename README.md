@@ -73,8 +73,6 @@ touch .env.local
 ### 2.3 Definir las siguientes variables de entorno:
 ```
 NEXT_PUBLIC_API_URL=http://localhost:3001
-NEXT_PUBLIC_API_USERS=$NEXT_PUBLIC_API_URL/users
-NEXT_PUBLIC_API_AUTH=$NEXT_PUBLIC_API_URL/login
 ```
 ## 3. Correr el servidor:
 ```
