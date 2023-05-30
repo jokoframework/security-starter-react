@@ -191,7 +191,7 @@ function Header({ selectedModule, setSidebarCollapsed }: {
   setSidebarCollapsed: Function,
 }) {
   return (
-    <div className="col-span-12 md:col-span-10 px-4 py-4 mt-2 bg-neutral-150 rounded-tl-3xl">
+    <div className="col-span-12 md:col-span-10 px-4 py-4 mt-2 bg-neutral-150 rounded-tl-[50px]">
       <div className="md:hidden flex items-center justify-between">
         <AlignJustify onClick={() => setSidebarCollapsed(false)} />
         <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" />
