@@ -60,7 +60,7 @@ Si el ícono AlignJustify es clickeado se cambia el estado del sidebar a no cola
 ### Content
 Representa el contenido de la página que está siendo visitada.  
 # Agregar fake backend
-Nota: Asegurarse de posicionarse en la ruta raiz del proyecto.
+Nota: Asegurarse de posicionarse en la ruta raiz del proyecto antes de ejecutar lo siguiente: 
 ## 1. Instalar lo definido en el package.json:
 ```
 npm install
@@ -70,10 +70,9 @@ npm install
 ```
 touch .env.local
 ```
-### 2.3 Definir las siguientes dos variables:
+### 2.3 Definir las siguientes variables de entorno:
 ```
-NEXT_PUBLIC_MOCK_USER_URL=http://localhost:3001/users
-NEXT_PUBLIC_MOCK_ACTIVE_USER_URL=http://localhost:3001/login
+NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 ## 3. Correr el servidor:
 ```

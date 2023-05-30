@@ -51,7 +51,11 @@ const modules: ModuleObject = {
  * El sidebar colapsado solo puede ser visto para breakpoints inferiores a md.  
  */
 export default function PageLayout({ children }: { children: React.ReactNode }) {
+  const SSR = typeof window === "undefined" //ServerSideRendering
   const router = useRouter()
+  if (!SSR && !isUserLogged()) { 
+    router.push("/login")
+  }
   const [selectedModule, setSelectedModule] = useState<Module>(modules[router.pathname])
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(true)
   return (
@@ -60,7 +64,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
         <CollapsedSidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}
           isSidebarCollapsed={isSidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed} />
         <Sidebar classes={"max-md:hidden"} selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
-        <Header selectedModule={selectedModule} setSidebarCollapsed={setSidebarCollapsed} />
+        <Header selectedModule={selectedModule} setSidebarCollapsed={setSidebarCollapsed}/>
         <Content>
           { children }
         </Content>
@@ -217,25 +221,40 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
  * selectedModule: Objeto tipo Module con informacion del modulo actualmente seleccionado.  
  * setSidebarCollapsed: Funcion para cambiar el estado del sidebar a no colapsado.
  */
-function Header({ selectedModule, setSidebarCollapsed }: { 
+function Header({ selectedModule, setSidebarCollapsed}: { 
   selectedModule: Module,
   setSidebarCollapsed: Function,
 }) {
+  /**
+ * Manejador de la accion onClick que lo llama.
+ * Logica del cierre de sesion.
+ * Limpia el storage del browser solamente cuando existe un usuario logueado.
+ */
+  function handleLogout() {
+    const ServerSideRendering = typeof window === 'undefined'
+    if (!ServerSideRendering && isUserLogged()) { //Lado del cliente y el usuario esta logueado
+      localStorage.removeItem("email")
+      localStorage.removeItem("accessToken")
+    } 
+  }
   return (
     <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
       <div className="md:hidden flex items-center justify-between">
         <AlignJustify onClick={() => setSidebarCollapsed(false)} />
         <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" />
-        <Link href="/login" passHref><div className="text-right">Login</div></Link>
+        <Link href="/login" onClick={handleLogout}>
+          <div className="text-right text-lila">Cerrar sesion</div>
+        </Link>
       </div>
-      <Link href="/login" className="max-md:hidden" passHref><div className="text-right">Login</div></Link>
+      <Link href="/login" className="max-md:hidden" onClick={handleLogout}>
+        <div className="text-right text-lila">Cerrar sesion</div>
+      </Link>
       <div className="mx-4 text-3xl font-semibold">
         { selectedModule.name }
       </div>
     </div>
   )
 }
-
 /**
  * Representa el contenido de la pagina que esta siendo visitada actualmente.  
  * Recibe:  
@@ -247,4 +266,11 @@ function Content({ children }: { children: React.ReactNode }) {
       { children }
     </div>
   )
+}
+/**
+ * Mira el storage del browser en busca de un token
+ * @returns un booleano que representa si un usuario esta o no logueado
+ */
+function isUserLogged(): boolean {
+  return typeof localStorage.getItem("accessToken") === "string"
 }

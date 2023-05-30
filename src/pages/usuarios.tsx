@@ -46,7 +46,7 @@ export default function UsersTable() {
   const [lastPage, setLastPage] = useState<number>(0)
   const [data, setData] = useState([])
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_MOCK_USER_URL}?_page=${page}&name_like=${nameLike}&_limit=${limit}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/users?_page=${page}&name_like=${nameLike}&_limit=${limit}`)
     .then((resp) => {
       setTotalCount(Number(resp.headers.get('X-Total-Count')!))
       /**

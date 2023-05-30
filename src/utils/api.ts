@@ -1,14 +1,13 @@
-import { API_LOGIN_USERS } from "./constants"
-import { API_USERS } from "./constants"
+import { API_URL } from "./constants"
 /**
- * Realiza una peticion a la API_LOGIN_USER con el metodo post, enviando email y password
+ * Realiza una peticion al backend para autenticar a un usuario enviando email y password.
  * @param data el objeto data, el cual sera enviado en el cuerpo de la peticion
  * @returns true --> hubo exito en la peticion al servidor y se guardo el token y email en el storage del browser.
  *         false --> la peticion no tuvo exito y se le informa al usuario.
  */
 export async function loginUser(data: {email: string, password: string}) {
     try {
-        let response = await fetch(API_LOGIN_USERS, {
+        let response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers:{
@@ -38,14 +37,14 @@ export async function loginUser(data: {email: string, password: string}) {
 }
 
 /**
- * Realiza una peticion a la API_USER con el metodo post, enviando email y password
+ * Realiza una peticion al backend para registrar un usuario enviando email y password.
  * @param data el objeto data, el cual sera enviado en el cuerpo de la peticion
  * @returns true --> hubo exito en la peticion al servidor y se guardo el token y email en el storage del browser.
  *         false --> la peticion no tuvo exito y se le informa al usuario.
  */
 export async function createUser(data: {email: string, password: string}) {
     try {
-        let response = await fetch(API_USERS, {
+        let response = await fetch(`${API_URL}/users`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers:{
