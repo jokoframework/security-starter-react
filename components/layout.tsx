@@ -132,7 +132,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               moduleData={modules['/']}
             >
               <BarChart2 color={selectedModule.id == modules['/'].id ? colors.blue[500] : "gray"} className="inline-block" />
-              <div className="px-4 text-lg">Dashboard</div>
+              <div className="px-4 text-base lg:text-lg">Dashboard</div>
             </SidebarItem>
           </Link>
           <Link href="/usuarios" passHref>
@@ -142,7 +142,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               moduleData={modules['/usuarios']}
             >
               <User color={selectedModule.id == modules['/usuarios'].id ? colors.blue[500] : "gray"} className="inline-block" />
-              <div className="px-4 text-lg">Usuarios</div>
+              <div className="px-4 text-base lg:text-lg">Usuarios</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -170,7 +170,7 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
   return (
     <li className={(selectedModule.id === moduleData.id ?
       "bg-blue-450 text-black font-semibold " : "hover:bg-blue-450 hover:text-black ") +
-      "hover:cursor-pointer px-3 mx-1 py-2 my-2 rounded-md flex items-center"}
+      "hover:cursor-pointer px-3 py-2 my-2 rounded-md flex items-center flex-wrap"}
       onClick={() => {setSelectedModule(moduleData)}}
     >
       { children }
