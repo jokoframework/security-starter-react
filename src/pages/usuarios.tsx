@@ -111,10 +111,10 @@ function PaginationControls({ page, lastPage, setPage }: {
   return(
     <>
       <div className="flex items-center">
-        <ChevronsLeft size={30} className="inline-block border bg-white" onClick={() => setPage(1)} />
-        <ChevronLeft size={30} className="inline-block border bg-white" onClick={() => page <= 1 ? setPage(1) : setPage(page - 1)} />
-        <ChevronRight size={30} className="inline-block border bg-white" onClick={() => page >= lastPage ? setPage(lastPage) : setPage(page + 1)} />
-        <ChevronsRight size={30} className="inline-block border bg-white" onClick={() => setPage(lastPage)} />
+        <button><ChevronsLeft size={30} className="inline-block border bg-white" onClick={() => setPage(1)} /></button>
+        <button><ChevronLeft size={30} className="inline-block border bg-white" onClick={() => page <= 1 ? setPage(1) : setPage(page - 1)} /></button>
+        <button><ChevronRight size={30} className="inline-block border bg-white" onClick={() => page >= lastPage ? setPage(lastPage) : setPage(page + 1)} /></button>
+        <button><ChevronsRight size={30} className="inline-block border bg-white" onClick={() => setPage(lastPage)} /></button>
         <div className="inline-block ml-2 text-sm md:text-base">
           Página {page} de {lastPage}
         </div>
