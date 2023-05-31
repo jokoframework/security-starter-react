@@ -63,7 +63,7 @@ export default function UsersTable() {
   }, [page, nameLike, totalCount, limit, lastPage])
   return (
     <>
-      <div className="relative block mx-9 w-1/3">
+      <div className="relative block mx-9 w-2/3 md:w-1/3">
         <div className="absolute inset-y-0 left-0 flex items-center">
           <Search size={20} color="gray" className="inline-block ml-2" />
         </div>
@@ -73,7 +73,7 @@ export default function UsersTable() {
           placeholder="Buscar por nombre..."
         />
       </div>
-      <div className="bg-white border rounded-lg my-5 mx-9 p-8 text-neutral-600">
+      <div className="bg-white border rounded-lg my-5 mx-9 p-8 text-neutral-600 sm:text-sm">
         <table className="p-5 px-9 table-fixed w-full">
           <thead>
             <tr className="text-left">
@@ -84,16 +84,16 @@ export default function UsersTable() {
           </thead>
           <tbody>
             {data.map((d: User) => (
-              <tr key={d.id} className="last:border-b-0 border-b-2">
-                <td className="py-4">{d.name}</td>
-                <td className="py-4">{d.username}</td>
-                <td className="py-4">{d.email}</td>
+              <tr key={d.id} className="last:border-b-0 border-b-2 break-all">
+                <td className="py-4 text-sm md:text-base">{d.name}</td>
+                <td className="py-4 text-sm md:text-base">{d.username}</td>
+                <td className="py-4 text-sm md:text-base">{d.email}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="mx-9 w-1/3 text-left">
+      <div className="mx-9 text-left">
         <PaginationControls page={page} lastPage={lastPage} setPage={setPage} />
       </div>
     </>
@@ -111,11 +111,11 @@ function PaginationControls({ page, lastPage, setPage }: {
   return(
     <>
       <div className="flex items-center">
-        <ChevronsLeft size={30} className="inline-block border" onClick={() => setPage(1)} />
-        <ChevronLeft size={30} className="inline-block border" onClick={() => page <= 1 ? setPage(1) : setPage(page - 1)} />
-        <ChevronRight size={30} className="inline-block border" onClick={() => page >= lastPage ? setPage(lastPage) : setPage(page + 1)} />
-        <ChevronsRight size={30} className="inline-block border" onClick={() => setPage(lastPage)} />
-        <div className="inline-block ml-2">
+        <button><ChevronsLeft size={30} className="inline-block border bg-white" onClick={() => setPage(1)} /></button>
+        <button><ChevronLeft size={30} className="inline-block border bg-white" onClick={() => page <= 1 ? setPage(1) : setPage(page - 1)} /></button>
+        <button><ChevronRight size={30} className="inline-block border bg-white" onClick={() => page >= lastPage ? setPage(lastPage) : setPage(page + 1)} /></button>
+        <button><ChevronsRight size={30} className="inline-block border bg-white" onClick={() => setPage(lastPage)} /></button>
+        <div className="inline-block ml-2 text-sm md:text-base">
           Página {page} de {lastPage}
         </div>
       </div>

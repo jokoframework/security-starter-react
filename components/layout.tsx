@@ -1,7 +1,14 @@
-import { User, AlignJustify, Target, Clipboard, Settings, X, BarChart2 } from 'react-feather'
+import { User, AlignJustify, Target, X, BarChart2 } from 'react-feather'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
+import logoJoko from '../public/images/logoJoko.png'
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from '../tailwind.config.js'
+import colors from 'tailwindcss/colors'
+
+const fullConfig = resolveConfig(tailwindConfig)
 
 /**
  * Representa informacion de un modulo.
@@ -31,16 +38,6 @@ const modules: ModuleObject = {
     name: "Usuarios",
     route: "/usuarios"
   },
-  "/item1": {
-    id: 2,
-    name: "Item1",
-    route: "/item1"
-  },
-  "/item2": {
-    id: 3,
-    name: "Item2",
-    route: "/item2"
-  },
 }
 
 /**
@@ -60,7 +57,7 @@ export default function PageLayout({ children }: { children: React.ReactNode }) 
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(true)
   return (
     <>
-      <div className="static grid grid-rows-12 grid-cols-12 bg-neutral-150">
+      <div className="static grid grid-rows-12 grid-cols-12">
         <CollapsedSidebar selectedModule={selectedModule} setSelectedModule={setSelectedModule}
           isSidebarCollapsed={isSidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed} />
         <Sidebar classes={"max-md:hidden"} selectedModule={selectedModule} setSelectedModule={setSelectedModule}/>
@@ -121,10 +118,12 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
 }) {
   return (
     <>
-      <div className={classes + " row-span-4 row-start-1 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450"}>
-        <Link className="py-3 px-4 text-xl flex items-center" href="/">
-          <Target size={50} className="border p-1 rounded-xl inline-block" />
-          <p className="px-3 inline-block antialiased text-black font-semibold">Joko Security</p>
+      <div className={classes + " row-span-6 bg-white overflow-y-auto col-span-2 py-3 text-neutral-450"}>
+        <Link className="py-3 px-4 text-xl flex items-center justify-center" href="/" onClick={() => setSelectedModule(modules['/'])}>
+          <Image
+            src={logoJoko}
+            alt="Joko Logo"
+          />
         </Link>
         <ul className="w-full px-4">
           <li className="py-2 mx-2">
@@ -136,8 +135,8 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               setSelectedModule={setSelectedModule}
               moduleData={modules['/']}
             >
-              <BarChart2 className="inline-block" />
-              <div className="px-4 text-lg">Dashboard</div>
+              <BarChart2 color={selectedModule.id == modules['/'].id ? colors.blue[500] : "gray"} className="inline-block" />
+              <div className="px-4 text-base lg:text-lg">Dashboard</div>
             </SidebarItem>
           </Link>
           <Link href="/usuarios" passHref>
@@ -146,38 +145,8 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               setSelectedModule={setSelectedModule}
               moduleData={modules['/usuarios']}
             >
-              <User className="inline-block" />
-              <div className="px-4 text-lg">Usuarios</div>
-            </SidebarItem>
-          </Link>
-        </ul>
-        <ul className="w-full px-4">
-          <li className="py-2 mx-2">
-            Workflows
-          </li>
-          <Link href="/item1" passHref>
-            <SidebarItem
-              selectedModule={selectedModule}
-              setSelectedModule={setSelectedModule}
-              moduleData={modules['/item1']}
-            >
-              <Clipboard className="inline-block" />
-              <div className="px-4 text-lg">To-Do</div>
-            </SidebarItem>
-          </Link>
-        </ul>
-        <ul className="w-full px-4">
-          <li className="py-2 mx-2">
-            General
-          </li>
-          <Link href="/item2" passHref>
-            <SidebarItem
-              selectedModule={selectedModule}
-              setSelectedModule={setSelectedModule}
-              moduleData={modules['/item2']}
-            >
-              <Settings className="inline-block" />
-              <div className="px-4 text-lg">Configuración</div>
+              <User color={selectedModule.id == modules['/usuarios'].id ? colors.blue[500] : "gray"} className="inline-block" />
+              <div className="px-4 text-base lg:text-lg">Usuarios</div>
             </SidebarItem>
           </Link>
         </ul>
@@ -204,8 +173,8 @@ function SidebarItem({ selectedModule, setSelectedModule, moduleData, children }
 }) {
   return (
     <li className={(selectedModule.id === moduleData.id ?
-      "bg-blue-450 text-black font-bold" : "hover:bg-blue-450 hover:text-black ") +
-      "hover:cursor-pointer px-2 py-2 rounded-md flex items-center"}
+      "bg-blue-450 text-black font-semibold " : "hover:bg-blue-450 hover:text-black ") +
+      "hover:cursor-pointer px-3 py-2 my-2 rounded-md flex items-center flex-wrap"}
       onClick={() => {setSelectedModule(moduleData)}}
     >
       { children }
@@ -238,7 +207,7 @@ function Header({ selectedModule, setSidebarCollapsed}: {
     } 
   }
   return (
-    <div className="col-span-12 md:col-span-10 row-span-1 px-4 py-4">
+    <div className="col-span-12 md:col-span-10 px-4 py-4 mt-2 bg-neutral-150 rounded-tl-[50px]">
       <div className="md:hidden flex items-center justify-between">
         <AlignJustify onClick={() => setSidebarCollapsed(false)} />
         <Target size={50} className="border p-1 rounded-xl hover:cursor-pointer" />
@@ -262,7 +231,7 @@ function Header({ selectedModule, setSidebarCollapsed}: {
  */
 function Content({ children }: { children: React.ReactNode }) {
   return (
-    <div className="row-span-3 col-span-12 md:col-span-10 h-screen bg-neutral-100">
+    <div className="row-span-11 col-span-12 md:col-span-10 h-screen bg-neutral-100">
       { children }
     </div>
   )
