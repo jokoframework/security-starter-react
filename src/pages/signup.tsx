@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Image from "next/image"
-import imagen from '../../public/images/desk_image1.jpg'
+import imagen from '../../public/images/desk_image3.jpg'
 import logoJoko from '../../public/images/logoJoko.png'
 import { useRouter } from 'next/router'
 import {createUser } from "../utils/api"
@@ -46,7 +46,7 @@ export default function Signup() {
     //Pagina de registro para los usuarios.
     return ( 
         <>
-            <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 selection:bg-lila selection:text-white max-md:grid-cols-1">
+            <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 selection:bg-lila selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
                     <form onSubmit={handleSubmit} className="min-h-full min-w-full flex flex-col p-6 gap-4 rounded-3xl"> 
                         <Image src={logoJoko} alt="Joko logo"></Image>
@@ -65,7 +65,7 @@ export default function Signup() {
                             <input onChange={handlePassword2Change} type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2 mt-2" 
                             required minLength={minimun} placeholder="**********"></input>
                         </label>
-                        <button type="submit" className="bg-lila text-white rounded-xl p-2 min-w-full hover:bg-violet-500 focus:cursor-wait">Registrarme</button>
+                        <button type="submit" className="bg-lila text-white rounded-xl p-2 mt-1 min-w-full hover:bg-violet-500 focus:cursor-wait">Registrarme</button>
                     </form>
                 </div>
                 <div className="min-h-full min-w-full flex items-center justify-center max-md:hidden">
