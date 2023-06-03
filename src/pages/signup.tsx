@@ -1,4 +1,3 @@
-import Link from "next/link"
 import React, { useState } from "react"
 import Image from "next/image"
 import imagen from '../../public/images/desk_image1.jpg'
@@ -49,9 +48,9 @@ export default function Signup() {
         <>
             <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 bg-neutral-150 selection:bg-lila selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
-                    <form onSubmit={handleSubmit} className="min-h-full min-w-full flex flex-col justify-center items-center p-6 gap-4 rounded-3xl"> 
+                    <form onSubmit={handleSubmit} className="min-h-full min-w-full flex flex-col p-6 gap-4 rounded-3xl"> 
                         <UserPlus size={150} color="#4f46e5"></UserPlus>
-                        <h1 className="text-3xl font-black">
+                        <h1 className="text-2xl font-black">
                             Registrarse
                         </h1>
                         <label className="min-w-full pt-1 pb-2">Introduzca su email:
