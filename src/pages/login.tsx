@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { LogIn } from "react-feather"
+import logoJoko from '../../public/images/logoJoko.png'
 import imagen from '../../public/images/modelo.jpg'
 import React, { useState } from "react"
 import { useRouter } from "next/router"
@@ -39,7 +39,7 @@ export default function Login() {
             <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 gap-4 selection:bg-lila selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
                     <form onSubmit={handleSubmit} action="/" className=" min-h-full min-w-full flex flex-col p-6 gap-4 rounded-3xl">
-                        <LogIn size={150} color="#4f46e5" className="hover:cursor-pointer"></LogIn>
+                        <Image src={logoJoko} alt="Joko logo"></Image>
                         <h1 className="text-2xl font-black">Inicie sesion</h1>
                         <label className="min-w-full pt-2 pb-2 text-gray-600">Introduzca su email:
                             <input onChange={handleEmailChange} type="email" className="block text-black min-w-full rounded-lg h-10 p-2 border-2 mt-2" 
