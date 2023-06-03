@@ -51,7 +51,7 @@ export default function Login() {
                         </label>
                         <div className="min-w-full flex justify-between"> 
                             <label className="flex items-center hover:cursor-pointer text-gray-600"> {/* Accent-color creo que no soportan todos los navegadores, investigar */}
-                                <input type="checkbox" className="mr-1 p-0 accent-lila hover:"></input>Recordarme 
+                                <input type="checkbox" className="mr-2 p-0 accent-lila hover:"></input>Recordarme 
                             </label>
                             <p className="hover:underline text-[#4f46e5]"><Link href="/signup">Registrarse</Link></p> 
                         </div>
