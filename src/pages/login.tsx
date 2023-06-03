@@ -42,11 +42,11 @@ export default function Login() {
                         <Image src={logoJoko} alt="Joko logo"></Image>
                         <h1 className="text-2xl font-black">Inicie sesion</h1>
                         <label className="min-w-full pt-2 pb-2 text-gray-600">Introduzca su email:
-                            <input onChange={handleEmailChange} type="email" className="block text-black min-w-full rounded-lg h-10 p-2 border-2 mt-2" 
+                            <input onChange={handleEmailChange} type="email" className="block text-black min-w-full rounded-lg h-10 p-2 border-2 mt-2 focus:border-lila" 
                             required placeholder="ejemplo@ejemplo.com"></input>
                         </label>
                         <label className="min-w-full pt-2 pb-2 text-gray-600">Introduzca su contraseña: 
-                            <input onChange={handlePasswordChange} type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2 mt-2" 
+                            <input onChange={handlePasswordChange} type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2 mt-2 focus:border-lila" 
                             required placeholder="**********"></input>
                         </label>
                         <div className="min-w-full flex justify-between"> 
