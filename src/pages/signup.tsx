@@ -49,7 +49,7 @@ export default function Signup() {
             <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 selection:bg-lila selection:text-white max-md:grid-cols-1">
                 <div className="mx-auto my-auto flex flex-col justify-center items-center w-3/4 h-3/4">
                     <form onSubmit={handleSubmit} className="min-h-full min-w-full flex flex-col p-6 gap-4 rounded-3xl"> 
-                        <Image src={logoJoko} alt="Joko logo"></Image>
+                        <Image src={logoJoko} alt="Joko logo" priority={true}></Image>
                         <h1 className="text-2xl font-black">
                             Registrarse
                         </h1>
@@ -69,7 +69,7 @@ export default function Signup() {
                     </form>
                 </div>
                 <div className="min-h-full min-w-full flex items-center justify-center max-md:hidden">
-                    <Image src={imagen} className='max-h-screen min-h-full object-cover' alt="Imagen"></Image>
+                    <Image src={imagen} className='max-h-screen min-h-full object-cover w-auto h-auto' alt="Imagen" priority={true}></Image>
                 </div>
             </div>
         </>
