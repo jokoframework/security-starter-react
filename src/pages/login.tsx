@@ -49,7 +49,7 @@ export default function Login() {
                             <input onChange={handlePasswordChange} type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2 mt-2" 
                             required placeholder="**********"></input>
                         </label>
-                        <div className="min-w-full flex justify-around"> 
+                        <div className="min-w-full flex justify-between"> 
                             <label className="flex items-center hover:cursor-pointer text-gray-600"> {/* Accent-color creo que no soportan todos los navegadores, investigar */}
                                 <input type="checkbox" className="mr-1 p-0 accent-lila hover:"></input>Recordarme 
                             </label>
