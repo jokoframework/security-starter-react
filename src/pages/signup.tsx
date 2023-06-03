@@ -65,7 +65,7 @@ export default function Signup() {
                             <input onChange={handlePassword2Change} type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2 mt-2" 
                             required minLength={minimun} placeholder="**********"></input>
                         </label>
-                        <button type="submit" className="bg-lila text-white rounded-xl p-2 min-w-full">Registrarme</button>
+                        <button type="submit" className="bg-lila text-white rounded-xl p-2 min-w-full hover:bg-violet-500">Registrarme</button>
                     </form>
                 </div>
                 <div className="min-h-full min-w-full flex items-center justify-center max-md:hidden">

@@ -55,7 +55,7 @@ export default function Login() {
                             </label>
                             <p className="hover:underline text-[#4f46e5]"><Link href="/signup">Registrarse</Link></p> 
                         </div>
-                        <button type="submit" className="bg-lila text-white rounded-xl p-2 min-w-full">Iniciar</button>
+                        <button type="submit" className="bg-lila text-white rounded-xl p-2 min-w-full hover:bg-violet-500">Iniciar</button>
                     </form>
                 </div>
                 <div className="min-h-full min-w-full flex items-center justify-center max-md:hidden">
