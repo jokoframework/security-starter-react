@@ -53,15 +53,15 @@ export default function Signup() {
                         <h1 className="text-2xl font-black">
                             Registrarse
                         </h1>
-                        <label className="min-w-full pt-1 pb-2">Introduzca su email:
+                        <label className="min-w-full pt-1 pb-2 text-gray-600">Introduzca su email:
                             <input onChange={handleEmailChange} type="email" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" 
                             required placeholder="ejemplo@ejemplo.com"></input>
                         </label>
-                        <label className="min-w-full pt-1 pb-2">Introduzca su contraseña: 
+                        <label className="min-w-full pt-1 pb-2 text-gray-600">Introduzca su contraseña: 
                             <input onChange={handlePassword1Change} type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" 
                             required minLength={minimun} placeholder="**********"></input>
                         </label>
-                        <label className="min-w-full pt-1 pb-2">Confirmar contraseña: 
+                        <label className="min-w-full pt-1 pb-2 text-gray-600">Confirmar contraseña: 
                             <input onChange={handlePassword2Change} type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" 
                             required minLength={minimun} placeholder="**********"></input>
                         </label>

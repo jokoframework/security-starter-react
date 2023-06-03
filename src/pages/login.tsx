@@ -41,15 +41,15 @@ export default function Login() {
                     <form onSubmit={handleSubmit} action="/" className=" min-h-full min-w-full flex flex-col p-6 gap-4 rounded-3xl">
                         <LogIn size={150} color="#4f46e5" className="hover:cursor-pointer"></LogIn>
                         <h1 className="text-2xl font-black">Inicie sesion</h1>
-                        <label className="min-w-full pt-2 pb-2">Introduzca su email:
+                        <label className="min-w-full pt-2 pb-2 text-gray-600">Introduzca su email:
                             <input onChange={handleEmailChange} type="email" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" 
                             required placeholder="ejemplo@ejemplo.com"></input>
                         </label>
-                        <label className="min-w-full pt-2 pb-2">Introduzca su contraseña: 
+                        <label className="min-w-full pt-2 pb-2 text-gray-600">Introduzca su contraseña: 
                             <input onChange={handlePasswordChange} type="password" className="block text-black min-w-full rounded-lg h-10 p-2 border-2" required placeholder="**********"></input>
                         </label>
                         <div className="min-w-full flex justify-around"> 
-                            <label className="flex items-center hover:cursor-pointer"> {/* Accent-color creo que no soportan todos los navegadores, investigar */}
+                            <label className="flex items-center hover:cursor-pointer text-gray-600"> {/* Accent-color creo que no soportan todos los navegadores, investigar */}
                                 <input type="checkbox" className="mr-1 p-0 accent-lila hover:"></input>Recordarme 
                             </label>
                             <p className="hover:underline text-[#4f46e5]"><Link href="/signup">Registrarse</Link></p> 
