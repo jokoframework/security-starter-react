@@ -1,4 +1,5 @@
 import { API_URL } from "./constants"
+
 /**
  * Realiza una peticion al backend para autenticar a un usuario enviando email y password.
  * @param data el objeto data, el cual sera enviado en el cuerpo de la peticion
@@ -10,10 +11,10 @@ export async function loginUser(data: {email: string, password: string}) {
         let response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             body: JSON.stringify(data),
-            headers:{
+            headers: {
               'Content-Type': 'application/json'
             }
-          })
+        })
         let responseJson = await response.json()
         //Validaciones para notificar al usuario
         if (response.ok) {
@@ -44,13 +45,15 @@ export async function loginUser(data: {email: string, password: string}) {
  */
 export async function createUser(data: {email: string, password: string}) {
     try {
+        console.log(API_URL)
+        console.log(data)
         let response = await fetch(`${API_URL}/users`, {
             method: 'POST',
             body: JSON.stringify(data),
-            headers:{
+            headers: {
               'Content-Type': 'application/json'
             }
-          })
+        })
         let responseJson = await response.json()
         //Validaciones para notificar al usuario
         if (response.ok) {

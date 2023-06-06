@@ -6999,6 +6999,11 @@
       "name": "Francesco Ledner",
       "username": "@Francesco.Ledner",
       "id": 1000
+    },
+    {
+      "email": "math@example.com",
+      "password": "$2a$10$wjMk7yY5FB8m2dofeBppI.6i6WuYFwORyDAiTNVaxnChGm6GYTB1m",
+      "id": 1001
     }
   ]
 }
