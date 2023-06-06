@@ -123,6 +123,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
           <Image
             src={logoJoko}
             alt="Joko Logo"
+            priority={true}
           />
         </Link>
         <ul className="w-full px-4">
