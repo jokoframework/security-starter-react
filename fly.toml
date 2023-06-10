@@ -14,6 +14,6 @@ primary_region = "scl"
   min_machines_running = 0
 
 [build.args]
-  NEXT_PUBLIC_API_URL="http://localhost:3001"
-  NEXT_PUBLIC_MOCK_USER_URL="http://localhost:3001/users"
-  NEXT_PUBLIC_MOCK_ACTIVE_USER_URL="http://localhost:3001/login"
+  NEXT_PUBLIC_API_URL="https://my-json-server.typicode.com/MathiMartinez00/security-starter-react-backend"
+  NEXT_PUBLIC_MOCK_USER_URL="https://my-json-server.typicode.com/MathiMartinez00/security-starter-react-backend/users"
+  NEXT_PUBLIC_MOCK_ACTIVE_USER_URL="https://my-json-server.typicode.com/MathiMartinez00/security-starter-react-backend/login"
