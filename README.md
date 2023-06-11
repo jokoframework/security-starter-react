@@ -2,7 +2,7 @@
 React starter project to work with security-starter-backend
 
 # Información del proyecto
-##  Datos del proyecto
+## Datos del proyecto
 El proyecto tiene las siguientes opciones de configuración:
 - TypeScript: Sí.
 - ESLint: Sí, para tener un estándar de código entre los colaboradores.
