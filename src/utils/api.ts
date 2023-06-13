@@ -18,7 +18,6 @@ export async function loginUser(data: {email: string, password: string}) {
         let responseJson = await response.json()
         //Validaciones para notificar al usuario
         if (response.ok) {
-            alert("Inicio de sesion exitoso")
             //para recuperar el access token y guardarlo en el storage del browser
             let token = responseJson.accessToken
             localStorage.setItem("accessToken", token) //guardo el access token en el storage del browser
@@ -57,7 +56,6 @@ export async function createUser(data: {email: string, password: string}) {
         let responseJson = await response.json()
         //Validaciones para notificar al usuario
         if (response.ok) {
-            alert("El usuario se registro con exito")
             //para recuperar el access token y guardarlo en el storage del browser
             let token = responseJson.accessToken
             localStorage.setItem("accessToken", token) //guardo el access token en el storage del browser

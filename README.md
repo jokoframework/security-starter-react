@@ -1,4 +1,6 @@
-# Datos del proyecto
+# Información del proyecto
+## Datos del proyecto
+
 El proyecto tiene las siguientes opciones de configuración:
 - TypeScript: Sí.
 - ESLint: Sí, para tener un estándar de código entre los colaboradores.
@@ -7,80 +9,49 @@ El proyecto tiene las siguientes opciones de configuración:
 - Utilizar el direction app/: No.
 - Import alias: @/* (opción por defecto).
 
-# Información del proyecto
+## Informacion sobre el [layout](/docs/layout.md)
+
 ## Deploy
+
 El frontend del proyecto (este repositorio) está montado en fly.io y se puede acceder en el siguiente enlace: https://security-starter-react.fly.dev/.
 
-Además, este repositorio cuenta con un GitHub Action para hacer un redeploy cada vez que se realiza un push a la rama JOKO-62-deploy, develop o main. Para realizar este redeploy se debe generar un FLY_API_TOKEN, un ejemplo de esto se puede ver en la siguiente [guía](https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/).
+Además, este repositorio cuenta con un GitHub Action para hacer un redeploy cada vez que se realiza un push a la rama JOKO-62-deploy, develop o main. Para realizar este redeploy se debe generar un FLY_API_TOKEN, un ejemplo de esto se puede ver en la siguiente guía.
 
-El backend está montado en Vercel.  
-Repositorio: https://github.com/MathiMartinez00/security-starter-react-backend.
+El backend está montado en Vercel.
+Repositorio: https://github.com/MathiMartinez00/security-starter-react-backend.  
 Enlace: https://security-starter-react-backend.vercel.app/.
 
-## Layout
-El layout para las páginas del proyecto se encuentra en components/layout.tsx, este es renderizado condicionalmente dependiendo de la ruta.
-Actualmente no es renderizado en /login ni /signup.  
-El layout consiste en un grid de Tailwind en el cual las columnas de la izquierdan ocupan el sidebar y las de las derecha la cabecera y el cuerpo de la página.
-Se realizaron 5 componentes de React para esto: PageLayout, CollapsedSidebar, Sidebar, Header y Content.
-### PageLayout 
-Sirve de wrapper para los componentes mencionados anteriormente: CollapsedSidebar, Sidebar, Header y Content.
-El layout es un grid de Tailwind con 12 columnas y 12 filas y renderiza todo el contenido de las paginas dentro del componente Content.  
-El sidebar colapsado solo puede ser visto para breakpoints inferiores a md.  
-### CollapsedSidebar
-Sidebar colapsado, solo es visible para breakpoins inferiores a md.  
-Recibe la informacion del modulo seleccionado actualmente y un estado que representa si el sidebar tiene que estar colapsado (o sea, visible) o no actualmente.  
-Si el icono X es seleccionado entonces se cambia el estado del sidebar a colapsado.  
-#### Parámetros
-| Parámetro | Tipo | Requerido | Descripción |
-| --------- | ---- | --------- | ----------- |
-| selectedModule | Module | Requerido | Objeto tipo Module con información del módulo actualmente seleccionado. |
-| setSelectedModule | Function | Requerido | Función para cambiar selectedModule. |
-| isSidebarCollapsed | Boolean | Requerido | Booleano que representa si el sidebar esta colapsado o no. |
-| setSidebarCollapsed | Function | Requerido | Función para cambiar el estado del sidebar a colapsado. |
-### Sidebar
-Sidebar del layout.  
-Funciona como una lista ```<ul></ul>``` con la clase ```overflow-y-auto``` donde cada elemento ```<li></li>``` representa un item dentro del sidebar.  
-Además, cada elemento que no sea el título del sidebar tiene un ```next/link``` alrededor del ```<li></li>``` para poder redireccionar a esa página.  
-#### Parámetros
-| Parámetro | Tipo | Requerido | Descripción |
-| --------- | ---- | --------- | ----------- |
-| selectedModule | Module | Requerido | Objeto tipo Module con informacion del actualmente seleccionado. |
-| setSelectedModule | Function | Requerido | Funcion para cambiar selectedModule. |
-### SidebarItem
-Representa un item dentro del Sidebar (diferente de un titulo).  
-Cuando un item es seleccionado esto se ve reflejado en el sidebar cambiando el color de fondo.  
-#### Parámetros
-| Parámetro | Tipo | Requerido | Descripción |
-| --------- | ---- | --------- | ----------- |
-| selectedModule | Module | Requerido | Objeto tipo Module con información del módulo actualmente seleccionado. |
-| setSelectedModule | Function | Requerido | Función para cambiar selectedModule. |
-| moduleData | Module | Requerido | Información sobre el módulo. |
-### Header
-Cabecera de la página, contiene un ícono clickeable para poder colapsar el sidebar y un botón para redirigir a la página de login.  
-Si el ícono AlignJustify es clickeado se cambia el estado del sidebar a no colapsado.  
-#### Parámetros 
-| Parámetro | Tipo | Requerido | Descripción |
-| --------- | ---- | --------- | ----------- |
-| selectedModule | Module | Requerido | Objeto tipo Module con información del módulo actualmente seleccionado. |
-| setSidebarCollapsed | Function | Requerido | Función para cambiar el estado del sidebar a no colapsado. |
-### Content
-Representa el contenido de la página que está siendo visitada.  
-# Agregar fake backend
+# Correr el proyecto
+Para probar el proyecto seguir en orden los siguientes pasos:
+## Clonar el repositorio:
+```
+git clone https://github.com/jokoframework/security-starter-react.git
+cd security-starter-react
+```
+## Agregar fake backend y correr los servidores
 Nota: Asegurarse de posicionarse en la ruta raiz del proyecto antes de ejecutar lo siguiente: 
-## 1. Instalar lo definido en el package.json:
+### 1. Instalar dependencias definidas en el package.json:
 ```
 npm install
 ```
-## 2. Definir variables de entorno.
-### 2.1 Crear el archivo .env.local:
+### 2. Definir variables de entorno.
+#### &ensp; &ensp; 2.1 Crear el archivo .env.local:
 ```
-touch .env.local
+vi .env.local
 ```
-### 2.3 Definir las siguientes variables de entorno:
+#### &ensp; &ensp; 2.3 Definir las siguientes variables de entorno:
 ```
 NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
-## 3. Correr el servidor:
+### 3. Correr el servidor json:
 ```
 npm run mockdb
+```
+### 4. Correr el servidor web:
+```
+npm run dev
+```
+### 5. Ir a la siguiente url:
+```
+http://localhost:3000
 ```
