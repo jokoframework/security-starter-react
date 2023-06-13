@@ -21,7 +21,7 @@ export default function Login() {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault() //evito que el formulario se envíe de una
-        ////Objeto que sirve para enviar en el body de la API fetch
+        //Objeto que sirve para enviar en el body de la API fetch
         const data = { 
             email: email, 
             password: pass
@@ -33,7 +33,7 @@ export default function Login() {
         }
     }
 
-//Pagina de login para los usuarios.
+    //Pagina de login para los usuarios.
     return (
         <>
             <div className="min-h-screen min-w-full grid grid-flow-col grid-cols-2 selection:bg-lila selection:text-white max-md:grid-cols-1">

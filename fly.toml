@@ -1,0 +1,19 @@
+# fly.toml app configuration file generated for security-starter-react on 2023-06-03T18:41:57-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "security-starter-react"
+primary_region = "scl"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+[build.args]
+  NEXT_PUBLIC_API_URL="https://security-starter-react-backend.vercel.app"
+  NEXT_PUBLIC_MOCK_USER_URL="https://security-starter-react-backend.vercel.app/users"
+  NEXT_PUBLIC_MOCK_ACTIVE_USER_URL="https://security-starter-react-backend.vercel.app/login"

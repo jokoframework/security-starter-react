@@ -4,11 +4,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import logoJoko from '../public/images/logoJoko.png'
-import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from '../tailwind.config.js'
-import colors from 'tailwindcss/colors'
-
-const fullConfig = resolveConfig(tailwindConfig)
 
 /**
  * Representa informacion de un modulo.
@@ -136,7 +131,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               setSelectedModule={setSelectedModule}
               moduleData={modules['/']}
             >
-              <BarChart2 color={selectedModule.id == modules['/'].id ? colors.blue[500] : "gray"} className="inline-block" />
+              <BarChart2 color={selectedModule.id == modules['/'].id ? "blue" : "gray"} className="inline-block" />
               <div className="px-4 text-base lg:text-lg">Dashboard</div>
             </SidebarItem>
           </Link>
@@ -146,7 +141,7 @@ function Sidebar({ selectedModule, setSelectedModule, classes }: {
               setSelectedModule={setSelectedModule}
               moduleData={modules['/usuarios']}
             >
-              <User color={selectedModule.id == modules['/usuarios'].id ? colors.blue[500] : "gray"} className="inline-block" />
+              <User color={selectedModule.id == modules['/usuarios'].id ? "blue" : "gray"} className="inline-block" />
               <div className="px-4 text-base lg:text-lg">Usuarios</div>
             </SidebarItem>
           </Link>
@@ -200,7 +195,7 @@ function Header({ selectedModule, setSidebarCollapsed}: {
  * Logica del cierre de sesion.
  * Limpia el storage del browser solamente cuando existe un usuario logueado.
  */
-  function handleLogout() {
+  const handleLogout = () => {
     const ServerSideRendering = typeof window === 'undefined'
     if (!ServerSideRendering && isUserLogged()) { //Lado del cliente y el usuario esta logueado
       localStorage.removeItem("email")

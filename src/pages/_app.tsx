@@ -21,7 +21,7 @@ const inter = Inter({ subsets: ['latin'] })
  */
 export default function App({ Component, pageProps, ...appProps }: AppProps) {
   const getContent = () => {
-    if (['/login', '/signup'].includes(appProps.router.pathname))
+    if (['/login', '/signup', '/404', '/500'].includes(appProps.router.pathname))
       return <Component {...pageProps} className={inter.className} />
     
     return (

@@ -1,8 +1,6 @@
-# security-starter-react
-React starter project to work with security-starter-backend
-
 # Información del proyecto
 ## Datos del proyecto
+
 El proyecto tiene las siguientes opciones de configuración:
 - TypeScript: Sí.
 - ESLint: Sí, para tener un estándar de código entre los colaboradores.
@@ -10,7 +8,18 @@ El proyecto tiene las siguientes opciones de configuración:
 - Utilizar el directorio src/: Sí.
 - Utilizar el direction app/: No.
 - Import alias: @/* (opción por defecto).
+
 ## Informacion sobre el [layout](/docs/layout.md)
+
+## Deploy
+
+El frontend del proyecto (este repositorio) está montado en fly.io y se puede acceder en el siguiente enlace: https://security-starter-react.fly.dev/.
+
+Además, este repositorio cuenta con un GitHub Action para hacer un redeploy cada vez que se realiza un push a la rama JOKO-62-deploy, develop o main. Para realizar este redeploy se debe generar un FLY_API_TOKEN, un ejemplo de esto se puede ver en la siguiente guía.
+
+El backend está montado en Vercel.
+Repositorio: https://github.com/MathiMartinez00/security-starter-react-backend.  
+Enlace: https://security-starter-react-backend.vercel.app/.
 
 # Correr el proyecto
 Para probar el proyecto seguir en orden los siguientes pasos:
