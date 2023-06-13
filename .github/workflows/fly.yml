@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - JOKO-62-deploy
+      - develop
+      - main
 jobs:
   deploy:
     name: Deploy app
